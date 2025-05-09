@@ -137,6 +137,11 @@ static const u8 sTeraShardDesc[]      = _("These shards may\n"
 static const u8 sGenericMulchDesc[]   = _("A fertilizer that\n"
                                           "is unsuitable for\n"
                                           "local soil.");
+static const u8 sGobstopperDesc[] = _("Raises the level\n"
+                                          "of a Pokémon by\n"
+                                          "one, infinitely.");    
+
+
 
 const struct Item gItemsInfo[] =
 {
@@ -1916,14 +1921,10 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Gobstopper"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Raises the level\n"
-            "of a Pokémon by\n"
-            "one, infinitely."),
+        .description = sGobstopperDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .importance = 1,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
+        .fieldUseFunc = ItemUseOutOfBattle_Gobstopper,
         .effect = gItemEffect_RareCandy,
         .iconPic = gItemIcon_RareCandy,
         .iconPalette = gItemIconPalette_RareCandy,
