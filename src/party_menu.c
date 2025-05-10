@@ -1490,7 +1490,7 @@ static void Task_ClosePartyMenuAndSetCB2(u8 taskId)
             if (VarGet(VAR_USING_KEYITEM) == 1)
             {
                 VarSet(VAR_USING_KEYITEM, 0);
-                SetMainCallback2(gPartyMenu.exitCallback);
+                SetMainCallback2(CB2_ReturnToField);
             }
             else
             {
