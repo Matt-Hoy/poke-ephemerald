@@ -28693,7 +28693,7 @@ F_TRAINER_FEMALE |
 #line 11433
             .ability = ABILITY_CHEEK_POUCH,
 #line 11431
-            .lvl = 9,
+            .lvl = 10,
 #line 11432
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,

@@ -12189,6 +12189,21 @@ const struct Item gItemsInfo[] =
 
 // Misc. Key Items
 
+    [ITEM_PORTA_CENTER] =
+    {
+        .name = _("PortaCenter"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A PokeCenter in your\n"
+            "pocket!"),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_PortaCenter,
+        .iconPic = gItemIcon_CoinCase,
+        .iconPalette = gItemIconPalette_CoinCase,
+    },
+
     [ITEM_BICYCLE] =
     {
         .name = _("Bicycle"),
