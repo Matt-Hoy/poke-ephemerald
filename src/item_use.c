@@ -947,6 +947,29 @@ static void RemoveUsedItem(void)
     }
 }
 
+void ItemUseOutOfBattle_InfiniteRepel(u8 taskId)
+{
+
+    if (!FlagGet(FLAG_SYS_NO_ENCOUNTER))
+    {
+        FlagSet(FLAG_SYS_NO_ENCOUNTER);
+        PlaySE(SE_REPEL);
+        if (gTasks[taskId].tUsingRegisteredKeyItem)
+            DisplayItemMessageOnField(taskId, gText_InfiniteRepelOn, Task_CloseCantUseKeyItemMessage);
+        else
+            DisplayItemMessage(taskId, 1, gText_InfiniteRepelOn, CloseItemMessage);
+    }
+    else
+    {
+        FlagClear(FLAG_SYS_NO_ENCOUNTER);
+        PlaySE(SE_PC_OFF);
+        if (gTasks[taskId].tUsingRegisteredKeyItem)
+            DisplayItemMessageOnField(taskId, gText_InfiniteRepelOff, Task_CloseCantUseKeyItemMessage);
+        else
+            DisplayItemMessage(taskId, 1, gText_InfiniteRepelOff, CloseItemMessage);
+    }
+}
+
 void ItemUseOutOfBattle_Repel(u8 taskId)
 {
     if (REPEL_STEP_COUNT == 0)

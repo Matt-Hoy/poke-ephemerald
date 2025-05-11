@@ -2158,6 +2158,22 @@ const struct Item gItemsInfo[] =
 
 // Encounter Modifiers
 
+    [ITEM_INFINITE_REPEL] =
+    {
+        .name = _("Infinite Repel"),
+        .price = 0,
+        .holdEffectParam = 100,
+        .description = COMPOUND_STRING(
+            "Repels all wild\n"
+            "Pokémon while\n"
+            "active."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_InfiniteRepel,
+        .iconPic = gItemIcon_Repel,
+        .iconPalette = gItemIconPalette_Repel,
+    },
+
     [ITEM_REPEL] =
     {
         .name = _("Repel"),
