@@ -6331,19 +6331,37 @@ Pic: Fisherman
 Gender: Male
 Music: Hiker
 Double Battle: No
-AI: Check Bad Move
-
-Magikarp
-Level: 10
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+AI: Smart Trainer
 
 Tentacool
-Level: 7
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Level: 16
+Nature: Modest
+Ability: ABILITY_LIQUID_OOZE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_WATER_PULSE
+- MOVE_ACID
+- MOVE_CONFUSE_RAY
+- MOVE_RAIN_DANCE
 
-Magikarp
-Level: 10
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Corsola
+Level: 16
+Nature: Hardy
+Ability: ABILITY_REGENERATOR
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_BRINE
+- MOVE_ROCK_TOMB
+- MOVE_LIGHT_SCREEN
+- MOVE_REFLECT
+
+Staryu
+Level: 16
+Nature: Modest
+Ability: ABILITY_NATURAL_CURE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_BRINE
+- MOVE_CONFUSE_RAY
+- MOVE_PSYBEAM
+- MOVE_MINIMIZE
 
 === TRAINER_NED ===
 Name: NED
@@ -6352,11 +6370,37 @@ Pic: Fisherman
 Gender: Male
 Music: Hiker
 Double Battle: No
-AI: Check Bad Move
+AI: Smart Trainer
 
-Tentacool
-Level: 11
-IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+Sandygast
+Level: 16
+Nature: Modest
+Ability: ABILITY_WATER_COMPACTION
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_MUD_SHOT
+- MOVE_HEX
+- MOVE_MEGA_DRAIN
+- MOVE_PROTECT
+
+Goldeen
+Level: 16
+Nature: Modest
+Ability: ABILITY_LIGHTNING_ROD
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_WATER_PULSE
+- MOVE_ICY_WIND
+- MOVE_SLEEP_TALK
+- MOVE_REST
+
+Veluza
+Level: 16
+Nature: Adamant
+Ability: ABILITY_SHARPNESS
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_SLASH
+- MOVE_AQUA_JET
+- MOVE_PLUCK
+- MOVE_FOCUS_ENERGY
 
 === TRAINER_DALE ===
 Name: DALE
