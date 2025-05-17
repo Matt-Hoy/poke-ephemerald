@@ -632,6 +632,9 @@ $(OBJEVENTGFXDIR)/mega_stones/CharizarditeX.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/mega_stones/CharizarditeY.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
+$(OBJEVENTGFXDIR)/mega_stones/Abomasite.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
 
 $(FLDEFFGFXDIR)/arrow.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
