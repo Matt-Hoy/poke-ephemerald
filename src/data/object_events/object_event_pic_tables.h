@@ -10,6 +10,55 @@ static const struct SpriteFrameImage sPicTable_BrendanAcroBike[] = {
     overworld_ascending_frames(gObjectEventPic_BrendanAcroBike, 4, 4),
 };
 
+static const struct SpriteFrameImage gObjectEventPicTable_Venusaurite[] = {
+    overworld_frame(gObjectEventPic_Venusaurite, 2, 2, 0),
+    overworld_frame(gObjectEventPic_Venusaurite, 2, 2, 1),
+    overworld_frame(gObjectEventPic_Venusaurite, 2, 2, 2),
+    overworld_frame(gObjectEventPic_Venusaurite, 2, 2, 3),
+    overworld_frame(gObjectEventPic_Venusaurite, 2, 2, 4),
+    overworld_frame(gObjectEventPic_Venusaurite, 2, 2, 5),
+    overworld_frame(gObjectEventPic_Venusaurite, 2, 2, 6),
+    overworld_frame(gObjectEventPic_Venusaurite, 2, 2, 7),
+    overworld_frame(gObjectEventPic_Venusaurite, 2, 2, 8),
+};
+
+static const struct SpriteFrameImage gObjectEventPicTable_Blastoisinite[] = {
+    overworld_frame(gObjectEventPic_Blastoisinite, 2, 2, 0),
+    overworld_frame(gObjectEventPic_Blastoisinite, 2, 2, 1),
+    overworld_frame(gObjectEventPic_Blastoisinite, 2, 2, 2),
+    overworld_frame(gObjectEventPic_Blastoisinite, 2, 2, 3),
+    overworld_frame(gObjectEventPic_Blastoisinite, 2, 2, 4),
+    overworld_frame(gObjectEventPic_Blastoisinite, 2, 2, 5),
+    overworld_frame(gObjectEventPic_Blastoisinite, 2, 2, 6),
+    overworld_frame(gObjectEventPic_Blastoisinite, 2, 2, 7),
+    overworld_frame(gObjectEventPic_Blastoisinite, 2, 2, 8),
+};
+
+static const struct SpriteFrameImage gObjectEventPicTable_CharizarditeX[] = {
+    overworld_frame(gObjectEventPic_CharizarditeX, 2, 2, 0),
+    overworld_frame(gObjectEventPic_CharizarditeX, 2, 2, 1),
+    overworld_frame(gObjectEventPic_CharizarditeX, 2, 2, 2),
+    overworld_frame(gObjectEventPic_CharizarditeX, 2, 2, 3),
+    overworld_frame(gObjectEventPic_CharizarditeX, 2, 2, 4),
+    overworld_frame(gObjectEventPic_CharizarditeX, 2, 2, 5),
+    overworld_frame(gObjectEventPic_CharizarditeX, 2, 2, 6),
+    overworld_frame(gObjectEventPic_CharizarditeX, 2, 2, 7),
+    overworld_frame(gObjectEventPic_CharizarditeX, 2, 2, 8),
+};
+
+
+static const struct SpriteFrameImage gObjectEventPicTable_CharizarditeY[] = {
+    overworld_frame(gObjectEventPic_CharizarditeY, 2, 2, 0),
+    overworld_frame(gObjectEventPic_CharizarditeY, 2, 2, 1),
+    overworld_frame(gObjectEventPic_CharizarditeY, 2, 2, 2),
+    overworld_frame(gObjectEventPic_CharizarditeY, 2, 2, 3),
+    overworld_frame(gObjectEventPic_CharizarditeY, 2, 2, 4),
+    overworld_frame(gObjectEventPic_CharizarditeY, 2, 2, 5),
+    overworld_frame(gObjectEventPic_CharizarditeY, 2, 2, 6),
+    overworld_frame(gObjectEventPic_CharizarditeY, 2, 2, 7),
+    overworld_frame(gObjectEventPic_CharizarditeY, 2, 2, 8),
+};
+
 static const struct SpriteFrameImage sPicTable_BrendanSurfing[] = {
     overworld_frame(gObjectEventPic_BrendanSurfing, 4, 4, 0),
     overworld_frame(gObjectEventPic_BrendanSurfing, 4, 4, 2),
