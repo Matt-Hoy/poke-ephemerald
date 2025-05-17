@@ -4636,7 +4636,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Venusaurite = { 
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
+    .paletteTag = OBJ_EVENT_PAL_VENUSAURITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
     .width = 16,
@@ -4655,7 +4655,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Venusaurite = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blastoisinite = { 
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
+    .paletteTag = OBJ_EVENT_PAL_BLASTOISINITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
     .width = 16,
@@ -4674,7 +4674,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blastoisinite = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharizarditeX = { 
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
+    .paletteTag = OBJ_EVENT_PAL_CHARIZARDITE_X,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
     .width = 16,
@@ -4693,7 +4693,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharizarditeX = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharizarditeY = { 
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
+    .paletteTag = OBJ_EVENT_PAL_CHARIZARDITE_Y,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
     .width = 16,

@@ -1226,11 +1226,11 @@
 #define FLAG_ITEM_LITTLEROOT_INFINITE_REPEL                         0x495
 #define FLAG_ITEM_LITTLEROOT_POKEMON_BOX_LINK                       0x496
 #define FLAG_ITEM_LITTLEROOT_PORTA_CENTER                           0x497
+#define FLAG_ITEM_VENUSAURITE                                       0x498
+#define FLAG_ITEM_BLASTOISINITE                                     0x499
+#define FLAG_ITEM_CHARIZARDITE_X                                    0x49A
+#define FLAG_ITEM_CHARIZARDITE_Y                                    0x49B
 
-#define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
-#define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
-#define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
-#define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag
 #define FLAG_UNUSED_0x49C                                           0x49C // Unused Flag
 #define FLAG_UNUSED_0x49D                                           0x49D // Unused Flag
 #define FLAG_UNUSED_0x49E                                           0x49E // Unused Flag
