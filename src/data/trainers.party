@@ -3230,19 +3230,6 @@ Sharpedo
 Level: 39
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
-=== TRAINER_TAKAO ===
-Name: TAKAO
-Class: Black Belt
-Pic: Black Belt
-Gender: Male
-Music: Intense
-Double Battle: No
-AI: Check Bad Move
-
-Machop
-Level: 13
-IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
-
 === TRAINER_HITOSHI ===
 Name: HITOSHI
 Class: Black Belt
@@ -4895,15 +4882,15 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - MOVE_CONFUSE_RAY
 - MOVE_SELF_DESTRUCT
 
-Stakataka
+Nosepass
 Level: 10
 Nature: Adamant
-Ability: ABILITY_BEAST_BOOST
+Ability: ABILITY_STURDY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_ROCK_THROW
-- MOVE_METAL_CLAW
-- MOVE_PROTECT
-- MOVE_MAGNET_RISE
+- MOVE_ROCK_TOMB
+- MOVE_REST
+- MOVE_SLEEP_TALK
+- MOVE_FIRE_PUNCH
 
 === TRAINER_BRAWLY_1 ===
 Name: BRAWLY
@@ -4911,33 +4898,58 @@ Class: Leader
 Pic: Leader Brawly
 Gender: Male
 Music: Male
-Items: Super Potion / Super Potion
 Double Battle: No
-AI: Basic Trainer
+AI: Smart Trainer
 
-Machop
+Pawmo @ ITEM_ORAN_BERRY
 Level: 16
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
-- Karate Chop
-- Low Kick
-- Seismic Toss
-- Bulk Up
+Nature: Adamant
+Ability: ABILITY_NATURAL_CURE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_LOW_SWEEP
+- MOVE_NUZZLE
+- MOVE_DIG
+- MOVE_QUICK_ATTACK
 
-Meditite
+Scraggy @ ITEM_ORAN_BERRY
 Level: 16
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
-- Focus Punch
-- Light Screen
-- Reflect
-- Bulk Up
+Nature: Adamant
+Ability: ABILITY_INTIMIDATE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_PAYBACK
+- MOVE_LOW_KICK
+- MOVE_FACADE
+- MOVE_BULK_UP
 
-Makuhita @ Sitrus Berry
-Level: 19
-IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
-- Arm Thrust
-- Vital Throw
-- Reversal
-- Bulk Up
+Croagunk @ ITEM_ORAN_BERRY
+Level: 16
+Nature: Adamant
+Ability: ABILITY_POISON_TOUCH
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_POISON_JAB
+- MOVE_LOW_SWEEP
+- MOVE_FLATTER
+- MOVE_TAUNT
+
+Meditite @ ITEM_CHESTO_BERRY
+Level: 17
+Nature: Hardy
+Ability: ABILITY_PURE_POWER
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_PSYBEAM
+- MOVE_FORCE_PALM
+- MOVE_WORK_UP
+- MOVE_DETECT
+
+Heracross @ ITEM_FLAME_ORB
+Level: 17
+Nature: Adamant
+Ability: ABILITY_GUTS
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_ARM_THRUST
+- MOVE_ROCK_TOMB
+- MOVE_PIN_MISSILE
+- MOVE_PROTECT
 
 === TRAINER_WATTSON_1 ===
 Name: WATTSON
@@ -7752,32 +7764,6 @@ IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 - Tackle
 - Sludge
 
-=== TRAINER_JOCELYN ===
-Name: JOCELYN
-Class: Battle Girl
-Pic: Battle Girl
-Gender: Female
-Music: Intense
-Double Battle: No
-AI: Check Bad Move
-
-Meditite
-Level: 13
-IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
-
-=== TRAINER_LAURA ===
-Name: LAURA
-Class: Battle Girl
-Pic: Battle Girl
-Gender: Female
-Music: Intense
-Double Battle: No
-AI: Check Bad Move
-
-Meditite
-Level: 13
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-
 === TRAINER_CYNDY_1 ===
 Name: CYNDY
 Class: Battle Girl
@@ -10510,45 +10496,6 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 Numel
 Level: 22
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
-
-=== TRAINER_BRENDEN ===
-Name: BRENDEN
-Class: Sailor
-Pic: Sailor
-Gender: Male
-Music: Male
-Double Battle: No
-AI: Check Bad Move
-
-Machop
-Level: 13
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
-
-=== TRAINER_LILITH ===
-Name: LILITH
-Class: Battle Girl
-Pic: Battle Girl
-Gender: Female
-Music: Intense
-Double Battle: No
-AI: Check Bad Move
-
-Meditite
-Level: 13
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-
-=== TRAINER_CRISTIAN ===
-Name: CRISTIAN
-Class: Black Belt
-Pic: Black Belt
-Gender: Male
-Music: Intense
-Double Battle: No
-AI: Check Bad Move
-
-Makuhita
-Level: 13
-IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 
 === TRAINER_SYLVIA ===
 Name: SYLVIA
