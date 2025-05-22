@@ -857,10 +857,6 @@ Route109_Text_RickyPostBattle:
 	.string "I'm getting famished… My inner tube\n"
 	.string "looks like a giant doughnut…$"
 
-Route109_Text_RickyRegister:
-	.string "Will you have another match with me\n"
-	.string "when I'm not all thirsty?$"
-
 Route109_Text_RickyRematchIntro:
 	.string "I'm hungry, but I've got enough pep in\n"
 	.string "me for a battle!$"
