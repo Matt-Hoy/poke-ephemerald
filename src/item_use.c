@@ -807,21 +807,6 @@ static bool8 TryToWaterSudowoodo(void)
         return TRUE;
 }
 
-void ItemUseOutOfBattle_Gobstopper(u8 taskId)
-{
-    if (!gTasks[taskId].tUsingRegisteredKeyItem)
-    {
-        gItemUseCB = ItemUseCB_Gobstopper;
-        SetUpItemUseCallback(taskId);
-    }
-    else
-    {
-        VarSet(VAR_USING_KEYITEM, 1);
-        gItemUseCB = ItemUseCB_Gobstopper;
-        SetMainCallback2(CB2_ShowPartyMenuForItemUse);
-    }
-}
-
 static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 {
     LockPlayerFieldControls();
