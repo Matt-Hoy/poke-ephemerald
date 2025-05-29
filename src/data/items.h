@@ -1911,6 +1911,22 @@ const struct Item gItemsInfo[] =
     },
 
 // Candy
+    [ITEM_GOBSTOPPER] =
+    {
+        .name = _("Gobstopper"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Raises the level\n"
+            "of a Pokémon by\n"
+            "one, infinitely."),
+        .pocket = POCKET_KEY_ITEMS,
+        .importance = 1,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Gobstopper,
+        .effect = gItemEffect_RareCandy,
+        .iconPic = gItemIcon_RareCandy,
+        .iconPalette = gItemIconPalette_RareCandy,
+    },
 
     [ITEM_RARE_CANDY] =
     {
