@@ -1365,7 +1365,7 @@
               {
                 "min_level": 5,
                 "max_level": 7,
-                "species": "SPECIES_KOMALA"
+                "species": "SPECIES_SHELLOS_EAST"
               },
               {
                 "min_level": 5,
@@ -1375,7 +1375,7 @@
               {
                 "min_level": 5,
                 "max_level": 7,
-                "species": "SPECIES_KOMALA"
+                "species": "SPECIES_SHELLOS_WEST"
               },
               {
                 "min_level": 5,
