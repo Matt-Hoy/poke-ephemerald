@@ -13,7 +13,6 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "party_menu.h"
-#include "pokemon.h"
 #include "random.h"
 #include "rotating_gate.h"
 #include "script.h"
@@ -1346,11 +1345,13 @@ bool8 PartyHasMonWithSurf(void)
     u8 i;
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-    // return (PlayerHasMove(MOVE_SURF) && PartyCanLearnMove(MOVE_SURF)); Don't know if this can be done in C
     {
-        if (PlayerHasMove(MOVE_SURF) && PartyCanLearnMove(MOVE_SURF))
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            return TRUE;
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
+                break;
+            if (MonKnowsMove(&gPlayerParty[i], MOVE_SURF))
+                return TRUE;
         }
     }
     return FALSE;
