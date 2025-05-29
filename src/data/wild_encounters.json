@@ -1967,64 +1967,64 @@
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "min_level": 7,
+                "max_level": 7,
+                "species": "SPECIES_ZUBAT"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_MAKUHITA"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "min_level": 7,
+                "max_level": 7,
+                "species": "SPECIES_MAKUHITA"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_ZUBAT"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_ARON"
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_MAKUHITA"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_ARON"
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_ABRA"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_MAKUHITA"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "min_level": 6,
+                "max_level": 6,
+                "species": "SPECIES_MAKUHITA"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "min_level": 7,
+                "max_level": 7,
+                "species": "SPECIES_GEODUDE"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_GEODUDE"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
+                "min_level": 6,
+                "max_level": 6,
+                "species": "SPECIES_GEODUDE"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_GEODUDE"
               }
             ]
           }
@@ -2036,64 +2036,64 @@
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_ZUBAT"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_ARON"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_BALTOY"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
+                "min_level": 9,
+                "max_level": 9,
                 "species": "SPECIES_ARON"
               },
               {
                 "min_level": 11,
-                "max_level": 13,
+                "max_level": 11,
                 "species": "SPECIES_ARON"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_ABRA"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_MAKUHITA"
               },
               {
                 "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "max_level": 11,
+                "species": "SPECIES_MAKUHITA"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_SABLEYE"
               },
               {
                 "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
+                "max_level": 11,
+                "species": "SPECIES_SABLEYE"
               }
             ]
           }
@@ -2435,64 +2435,64 @@
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_ZUBAT"
               },
               {
                 "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
+                "max_level": 11,
+                "species": "SPECIES_ARON"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_BALTOY"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
+                "min_level": 10,
+                "max_level": 10,
                 "species": "SPECIES_ARON"
               },
               {
                 "min_level": 11,
-                "max_level": 13,
+                "max_level": 11,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 12,
+                "max_level": 12,
                 "species": "SPECIES_ARON"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_ABRA"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_SABLEYE"
               },
               {
                 "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "max_level": 11,
+                "species": "SPECIES_SABLEYE"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "min_level": 12,
+                "max_level": 12,
+                "species": "SPECIES_SABLEYE"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_SABLEYE"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
+                "min_level": 12,
+                "max_level": 12,
+                "species": "SPECIES_SABLEYE"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_SABLEYE"
               }
             ]
           },
@@ -4593,64 +4593,64 @@
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "min_level": 7,
+                "max_level": 7,
+                "species": "SPECIES_ZUBAT"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_MAKUHITA"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "min_level": 7,
+                "max_level": 7,
+                "species": "SPECIES_MAKUHITA"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_ZUBAT"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_MAKUHITA"
+              },
+              {
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_ABRA"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_MAKUHITA"
+              },
+              {
+                "min_level": 6,
+                "max_level": 6,
+                "species": "SPECIES_MAKUHITA"
+              },
+              {
+                "min_level": 7,
+                "max_level": 7,
                 "species": "SPECIES_ARON"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
+                "min_level": 8,
+                "max_level": 8,
                 "species": "SPECIES_ARON"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "min_level": 7,
+                "max_level": 7,
+                "species": "SPECIES_ARON"
               },
               {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_MANKEY"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_ARON"
               }
             ]
           }
