@@ -4386,7 +4386,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
 #if P_FAMILY_MINIOR
 #define MINIOR_MISC_INFO(color)                                             \
         .types = MON_TYPES(TYPE_ROCK, TYPE_FLYING),                         \
-        .catchRate = 191,                                                    \
+        .catchRate = 30,                                                    \
         .expYield = 154,                                                    \
         .evYield_Defense = 1,                                               \
         .evYield_SpDefense = 1,                                             \
@@ -6993,7 +6993,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .baseSpAttack  = 73,
         .baseSpDefense = 67,
         .types = MON_TYPES(TYPE_POISON),
-        .catchRate = 125,
+        .catchRate = 191,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 210 : 189,
         .evYield_Speed = 1,
         .genderRatio = MON_GENDERLESS,
