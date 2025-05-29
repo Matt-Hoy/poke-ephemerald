@@ -317,7 +317,7 @@
 #define STRINGID_FIREWEAKENED                         316
 #define STRINGID_PKMNHIDUNDERWATER                    317
 #define STRINGID_PKMNSPRANGUP                         318
-#define STRINGID_UNUSED                               319
+#define STRINGID_HMMOVESCANTBEFORGOTTEN               319
 #define STRINGID_XFOUNDONEY                           320
 #define STRINGID_PLAYERDEFEATEDTRAINER1               321
 #define STRINGID_SOOTHINGAROMA                        322

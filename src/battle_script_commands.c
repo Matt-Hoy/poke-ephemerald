@@ -8598,26 +8598,33 @@ static void Cmd_yesnoboxlearnmove(void)
             else
             {
                 u16 moveId = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MOVE1 + movePosition);
-                gBattlescriptCurrInstr = cmd->forgotMovePtr;
-
-                PREPARE_MOVE_BUFFER(gBattleTextBuff2, moveId)
-
-                RemoveMonPPBonus(&gPlayerParty[gBattleStruct->expGetterMonId], movePosition);
-                SetMonMoveSlot(&gPlayerParty[gBattleStruct->expGetterMonId], gMoveToLearn, movePosition);
-
-                if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId && MOVE_IS_PERMANENT(0, movePosition))
+                if (IsMoveHM(moveId))
                 {
-                    RemoveBattleMonPPBonus(&gBattleMons[0], movePosition);
-                    SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, movePosition);
+                    PrepareStringBattle(STRINGID_HMMOVESCANTBEFORGOTTEN, B_POSITION_PLAYER_LEFT);
+                    gBattleScripting.learnMoveState = 6;
                 }
-                if (IsDoubleBattle()
-                    && gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId
-                    && MOVE_IS_PERMANENT(2, movePosition))
+                else
                 {
-                    RemoveBattleMonPPBonus(&gBattleMons[2], movePosition);
-                    SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, movePosition);
+                    gBattlescriptCurrInstr = cmd->forgotMovePtr;
+
+                    PREPARE_MOVE_BUFFER(gBattleTextBuff2, moveId)
+
+                    RemoveMonPPBonus(&gPlayerParty[gBattleStruct->expGetterMonId], movePosition);
+                    SetMonMoveSlot(&gPlayerParty[gBattleStruct->expGetterMonId], gMoveToLearn, movePosition);
+
+                    if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId && MOVE_IS_PERMANENT(0, movePosition))
+                    {
+                        RemoveBattleMonPPBonus(&gBattleMons[0], movePosition);
+                        SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, movePosition);
+                    }
+                    if (IsDoubleBattle()
+                        && gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId
+                        && MOVE_IS_PERMANENT(2, movePosition))
+                    {
+                        RemoveBattleMonPPBonus(&gBattleMons[2], movePosition);
+                        SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, movePosition);
+                    }
                 }
-                
             }
         }
         break;
