@@ -377,11 +377,6 @@ const u32 gObjectEventPic_VigorothMover[] = INCBIN_U32("graphics/object_events/p
 const u32 gObjectEventPic_SudowoodoTree[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/sudowoodo_tree.4bpp");
 const u32 gObjectEventPic_RayquazaCutscene[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/rayquaza_cutscene.4bpp");
 
-const u32 gObjectEventPic_Venusaurite[] = INCBIN_U32("graphics/object_events/pics/mega_stones/Venusaurite.4bpp");
-const u32 gObjectEventPic_Blastoisinite[] = INCBIN_U32("graphics/object_events/pics/mega_stones/Blastoisinite.4bpp");
-const u32 gObjectEventPic_CharizarditeX[] = INCBIN_U32("graphics/object_events/pics/mega_stones/CharizarditeX.4bpp");
-const u32 gObjectEventPic_CharizarditeY[] = INCBIN_U32("graphics/object_events/pics/mega_stones/CharizarditeY.4bpp");
-
 const u16 gObjectEventPal_HoOh[] = INCBIN_U16("graphics/object_events/palettes/ho_oh.gbapal");
 const u16 gObjectEventPal_Lugia[] = INCBIN_U16("graphics/object_events/palettes/lugia.gbapal");
 
