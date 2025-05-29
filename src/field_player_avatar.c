@@ -1343,6 +1343,8 @@ u8 GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
 
 bool8 PartyHasMonWithSurf(void)
 {
+    u8 i;
+
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     // return (PlayerHasMove(MOVE_SURF) && PartyCanLearnMove(MOVE_SURF)); Don't know if this can be done in C
     {

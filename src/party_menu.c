@@ -2953,7 +2953,7 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
     }
 }
 
-u16 MoveToHM(u16 move)
+int MoveToHM(u16 move)
 {
     int item;
     switch (move)
@@ -3033,20 +3033,6 @@ u16 MoveToFlag(u16 move)
     return id;
 }
 
-bool8 CanUseFieldMove(u16 species, u16 move)
-{
-    u16 id = MoveToFlag(move);
-    if (!FlagGet(id))
-    {
-        return FALSE;
-    }
-    if (CanLearnTeachableMove(species, move) && PlayerHasMove(move))
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 {
     u8 i, j;
@@ -3057,7 +3043,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     u16 species = GetMonData(&gPlayerParty[slotId], MON_DATA_SPECIES, NULL);
     for (j = 0; j < 8; j++)
     {
-        u16 move = sFieldMoves[j];
+        int move = sFieldMoves[j];
         u16 id = MoveToFlag(move);
 
         if (FlagGet(id) && CanLearnTeachableMove(species, move) && PlayerHasMove(move))
