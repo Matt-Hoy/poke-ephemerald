@@ -9,16 +9,16 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type preserves other 
     PARAMETRIZE { tera = GIMMICK_NONE; }
     PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
-        PLAYER(SPECIES_BULBASAUR) { TeraType(TYPE_NORMAL); }
+        PLAYER(SPECIES_VILEPLUME) { TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_VINE_WHIP, gimmick: tera); }
         TURN { MOVE(player, MOVE_SLUDGE_BOMB); }
     } SCENE {
-        MESSAGE("Bulbasaur used Vine Whip!");
+        MESSAGE("Vileplume used Vine Whip!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_VINE_WHIP, player);
         HP_BAR(opponent, captureDamage: &results[i].damage1);
-        MESSAGE("Bulbasaur used Sludge Bomb!");
+        MESSAGE("Vileplume used Sludge Bomb!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SLUDGE_BOMB, player);
         HP_BAR(opponent, captureDamage: &results[i].damage2);
     } FINALLY {
