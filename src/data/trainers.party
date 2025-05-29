@@ -10826,45 +10826,6 @@ Natu
 Level: 36
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-=== TRAINER_BRENDAN_RUSTBORO_MUDKIP ===
-Name: BRENDAN
-Class: Rival
-Pic: Brendan
-Gender: Male
-Music: Male
-Double Battle: No
-AI: Smart Trainer
-
-Taillow @ ITEM_FLAME_ORB
-Level: 15
-Nature: Adamant
-Ability: ABILITY_GUTS
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_WING_ATTACK
-- MOVE_QUICK_ATTACK
-- MOVE_GROWL
-- MOVE_PROTECT
-
-Marshtomp @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Modest
-Ability: ABILITY_SWIFT_SWIM
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_MUD_SHOT
-- MOVE_WATER_GUN
-- MOVE_SUPERSONIC
-- MOVE_PROTECT
-
-Grovyle @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Adamant
-Ability: ABILITY_UNBURDEN
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_LEAFAGE
-- MOVE_QUICK_ATTACK
-- MOVE_LEER
-- MOVE_DETECT
-
 === TRAINER_BRENDAN_RUSTBORO_TREECKO ===
 Name: BRENDAN
 Class: Rival
@@ -10872,76 +10833,32 @@ Pic: Brendan
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Smart Trainer
+AI: Check Bad Move
 
-Taillow @ ITEM_FLAME_ORB
+Lotad
+Level: 13
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Torchic
 Level: 15
-Nature: Adamant
-Ability: ABILITY_GUTS
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_WING_ATTACK
-- MOVE_QUICK_ATTACK
-- MOVE_GROWL
-- MOVE_PROTECT
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
-Grovyle @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Adamant
-Ability: ABILITY_UNBURDEN
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_LEAFAGE
-- MOVE_QUICK_ATTACK
-- MOVE_LEER
-- MOVE_DETECT
-
-Combusken @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Adamant
-Ability: ABILITY_SPEED_BOOST
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_DOUBLE_KICK
-- MOVE_FLAME_CHARGE
-- MOVE_QUICK_ATTACK
-- MOVE_DETECT
-
-=== TRAINER_BRENDAN_RUSTBORO_TORCHIC ===
+=== TRAINER_BRENDAN_RUSTBORO_MUDKIP ===
 Name: BRENDAN
 Class: Rival
 Pic: Brendan
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Smart Trainer
+AI: Check Bad Move
 
-Taillow @ ITEM_FLAME_ORB
+Wingull
+Level: 13
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Treecko
 Level: 15
-Nature: Adamant
-Ability: ABILITY_GUTS
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_WING_ATTACK
-- MOVE_QUICK_ATTACK
-- MOVE_GROWL
-- MOVE_PROTECT
-
-Combusken @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Adamant
-Ability: ABILITY_SPEED_BOOST
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_DOUBLE_KICK
-- MOVE_FLAME_CHARGE
-- MOVE_QUICK_ATTACK
-- MOVE_DETECT
-
-Marshtomp @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Modest
-Ability: ABILITY_SWIFT_SWIM
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_MUD_SHOT
-- MOVE_WATER_GUN
-- MOVE_SUPERSONIC
-- MOVE_PROTECT
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_PAXTON ===
 Name: PAXTON
@@ -11033,6 +10950,23 @@ Loudred
 Level: 33
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+=== TRAINER_BRENDAN_RUSTBORO_TORCHIC ===
+Name: BRENDAN
+Class: Rival
+Pic: Brendan
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Slugma
+Level: 13
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Mudkip
+Level: 15
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
 === TRAINER_MAY_RUSTBORO_MUDKIP ===
 Name: MAY
 Class: Rival
@@ -11040,115 +10974,15 @@ Pic: May
 Gender: Female
 Music: Female
 Double Battle: No
-AI: Smart Trainer
+AI: Check Bad Move / Try To Faint / Force Setup First Turn
 
-Taillow @ ITEM_FLAME_ORB
+Wingull
+Level: 13
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Treecko
 Level: 15
-Nature: Adamant
-Ability: ABILITY_GUTS
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_WING_ATTACK
-- MOVE_QUICK_ATTACK
-- MOVE_GROWL
-- MOVE_PROTECT
-
-Marshtomp @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Modest
-Ability: ABILITY_SWIFT_SWIM
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_MUD_SHOT
-- MOVE_WATER_GUN
-- MOVE_SUPERSONIC
-- MOVE_PROTECT
-
-Grovyle @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Adamant
-Ability: ABILITY_UNBURDEN
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_LEAFAGE
-- MOVE_QUICK_ATTACK
-- MOVE_LEER
-- MOVE_DETECT
-
-=== TRAINER_MAY_RUSTBORO_TREECKO ===
-Name: MAY
-Class: Rival
-Pic: May
-Gender: Female
-Music: Female
-Double Battle: No
-AI: Smart Trainer
-
-Taillow @ ITEM_FLAME_ORB
-Level: 15
-Nature: Adamant
-Ability: ABILITY_GUTS
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_WING_ATTACK
-- MOVE_QUICK_ATTACK
-- MOVE_GROWL
-- MOVE_PROTECT
-
-Grovyle @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Adamant
-Ability: ABILITY_UNBURDEN
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_LEAFAGE
-- MOVE_QUICK_ATTACK
-- MOVE_LEER
-- MOVE_DETECT
-
-Combusken @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Adamant
-Ability: ABILITY_SPEED_BOOST
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_DOUBLE_KICK
-- MOVE_FLAME_CHARGE
-- MOVE_QUICK_ATTACK
-- MOVE_DETECT
-
-=== TRAINER_MAY_RUSTBORO_TORCHIC ===
-Name: MAY
-Class: Rival
-Pic: May
-Gender: Female
-Music: Female
-Double Battle: No
-AI: Smart Trainer
-
-Taillow @ ITEM_FLAME_ORB
-Level: 15
-Nature: Adamant
-Ability: ABILITY_GUTS
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_WING_ATTACK
-- MOVE_QUICK_ATTACK
-- MOVE_GROWL
-- MOVE_PROTECT
-
-Combusken @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Adamant
-Ability: ABILITY_SPEED_BOOST
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_DOUBLE_KICK
-- MOVE_FLAME_CHARGE
-- MOVE_QUICK_ATTACK
-- MOVE_DETECT
-
-Marshtomp @ ITEM_ORAN_BERRY
-Level: 16
-Nature: Modest
-Ability: ABILITY_SWIFT_SWIM
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_MUD_SHOT
-- MOVE_WATER_GUN
-- MOVE_SUPERSONIC
-- MOVE_PROTECT
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_MAXIE_MAGMA_HIDEOUT ===
 Name: MAXIE
@@ -13155,35 +12989,11 @@ Pic: Fisherman
 Gender: Male
 Music: Hiker
 Double Battle: No
-AI: Smart Trainer
+AI: Check Bad Move
 
-Ducklett
-Level: 7
-Nature: Modest
-Ability: ABILITY_KEEN_EYE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_WATER_GUN
-- MOVE_WING_ATTACK
-- MOVE_DEFOG
-
-Dewpider
-Level: 8
-Nature: Hardy
-Ability: ABILITY_WATER_BUBBLE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_BUG_BITE
-- MOVE_BITE
-- MOVE_WATER_GUN
-- MOVE_INFESTATION
-
-Shellos
-Level: 8
-Nature: Modest
-Ability: ABILITY_STORM_DRAIN
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_WATER_GUN
-- MOVE_MUD_SLAP
-- MOVE_HARDEN
+Magikarp
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_HAILEY ===
 Name: HAILEY
@@ -14317,6 +14127,40 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 Vigoroth
 Level: 29
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+=== TRAINER_MAY_RUSTBORO_TREECKO ===
+Name: MAY
+Class: Rival
+Pic: May
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+
+Lotad
+Level: 13
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Torchic
+Level: 15
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_MAY_RUSTBORO_TORCHIC ===
+Name: MAY
+Class: Rival
+Pic: May
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+
+Torkoal
+Level: 13
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Mudkip
+Level: 15
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_ROXANNE_2 ===
 Name: ROXANNE
