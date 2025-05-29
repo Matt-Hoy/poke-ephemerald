@@ -610,71 +610,6 @@
         {
           "map": "MAP_ROUTE105",
           "base_label": "gRoute105",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_ARBOLIVA"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_DEDENNE"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_ARBOLIVA"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_DEDENNE"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_TOUCANNON"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_TOUCANNON"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_TOXTRICITY"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_TOXTRICITY"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_TOXTRICITY"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_TOXTRICITY"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_DIALGA"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_DIALGA"
-              }
-            ]
-          },
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -757,6 +692,71 @@
                 "min_level": 40,
                 "max_level": 45,
                 "species": "SPECIES_WAILMER"
+              }
+            ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_DEDENNE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_DEDENNE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_TOXTRICITY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_TOXTRICITY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_TOXTRICITY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_TOXTRICITY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_DIALGA"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_DIALGA"
               }
             ]
           }
