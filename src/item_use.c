@@ -947,17 +947,6 @@ static void RemoveUsedItem(void)
     }
 }
 
-void ItemUseOutOfBattle_PortaCenter(u8 taskId)
-{
-    u32 i;
-    for (i = 0; i < gPlayerPartyCount; i++)
-        HealPokemon(&gPlayerParty[i]);
-    if (gTasks[taskId].tUsingRegisteredKeyItem)
-        DisplayItemMessageOnField(taskId, gText_PortaCenterHeal, Task_CloseCantUseKeyItemMessage);
-    else
-        DisplayItemMessage(taskId, 1, gText_PortaCenterHeal, CloseItemMessage);
-}
-
 void ItemUseOutOfBattle_InfiniteRepel(u8 taskId)
 {
 
