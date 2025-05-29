@@ -381,7 +381,6 @@ const u32 gObjectEventPic_Venusaurite[] = INCBIN_U32("graphics/object_events/pic
 const u32 gObjectEventPic_Blastoisinite[] = INCBIN_U32("graphics/object_events/pics/mega_stones/Blastoisinite.4bpp");
 const u32 gObjectEventPic_CharizarditeX[] = INCBIN_U32("graphics/object_events/pics/mega_stones/CharizarditeX.4bpp");
 const u32 gObjectEventPic_CharizarditeY[] = INCBIN_U32("graphics/object_events/pics/mega_stones/CharizarditeY.4bpp");
-const u32 gObjectEventPic_Abomasite[] = INCBIN_U32("graphics/object_events/pics/mega_stones/Abomasite.4bpp");
 
 const u16 gObjectEventPal_HoOh[] = INCBIN_U16("graphics/object_events/palettes/ho_oh.gbapal");
 const u16 gObjectEventPal_Lugia[] = INCBIN_U16("graphics/object_events/palettes/lugia.gbapal");
@@ -394,7 +393,6 @@ const u16 gObjectEventPal_Venusaurite[] = INCBIN_U16("graphics/object_events/pal
 const u16 gObjectEventPal_Blastoisinite[] = INCBIN_U16("graphics/object_events/palettes/Blastoisinite.gbapal");
 const u16 gObjectEventPal_CharizarditeX[] = INCBIN_U16("graphics/object_events/palettes/CharizarditeX.gbapal");
 const u16 gObjectEventPal_CharizarditeY[] = INCBIN_U16("graphics/object_events/palettes/CharizarditeY.gbapal");
-const u16 gObjectEventPal_Abomasite[] = INCBIN_U16("graphics/object_events/palettes/Abomasite.gbapal");
 
 #if OW_FOLLOWERS_POKEBALLS
 const u32 gObjectEventPic_MasterBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_master.4bpp");

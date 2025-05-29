@@ -244,7 +244,6 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Venusaurite
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blastoisinite;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharizarditeX;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharizarditeY;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Abomasite;
 
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bard;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hipster;
@@ -500,7 +499,6 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_BLASTOISINITE] =            &gObjectEventGraphicsInfo_Blastoisinite,
     [OBJ_EVENT_GFX_CHARIZARDITE_X] =           &gObjectEventGraphicsInfo_CharizarditeX,
     [OBJ_EVENT_GFX_CHARIZARDITE_Y] =           &gObjectEventGraphicsInfo_CharizarditeY,
-    [OBJ_EVENT_GFX_ABOMASITE] =                &gObjectEventGraphicsInfo_Abomasite,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {
