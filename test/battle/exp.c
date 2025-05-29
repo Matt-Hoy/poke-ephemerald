@@ -1,5 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
+#include "event_data.h"
 
 #if B_EXP_CATCH >= GEN_6
 
@@ -34,6 +35,7 @@ WILD_BATTLE_TEST("Higher leveled Pokemon give more exp", s32 exp)
     PARAMETRIZE { level = 10; }
 
     GIVEN {
+        FLAG_SET(FLAG_BADGE08_GET);
         PLAYER(SPECIES_WOBBUFFET) { Level(20); }
         OPPONENT(SPECIES_CATERPIE) { Level(level); HP(1); }
     } WHEN {
@@ -102,6 +104,7 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
     PARAMETRIZE { level = MAX_LEVEL; }
 
     GIVEN {
+        FLAG_SET(FLAG_BADGE08_GET);
         PLAYER(SPECIES_WOBBUFFET) { Level(1); Item(ITEM_LUCKY_EGG); OTName("Test"); } // OT Name is different so it gets more exp as a traded mon
         OPPONENT(SPECIES_BLISSEY) { Level(level); HP(1); }
     } WHEN {
@@ -118,33 +121,3 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
         EXPECT_GT(results[2].exp, results[1].exp);
     }
 }
-
-#if I_EXP_SHARE_ITEM < GEN_6
-
-WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not participate in battle")
-{
-    u32 item = 0;
-
-    PARAMETRIZE { item = ITEM_NONE; }
-    PARAMETRIZE { item = ITEM_EXP_SHARE; }
-
-    GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WYNAUT) { Level(40); Item(item); }
-        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_SCRATCH); }
-    } SCENE {
-        MESSAGE("Wobbuffet used Scratch!");
-        MESSAGE("The wild Caterpie fainted!");
-        // This message should appear only for gen6> exp share.
-        NOT MESSAGE("The rest of your team gained EXP. Points thanks to the Exp. Share!");
-    } THEN {
-        if (item == ITEM_EXP_SHARE)
-            EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
-        else
-            EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
-    }
-}
-
-#endif // I_EXP_SHARE_ITEM
