@@ -397,14 +397,14 @@ PetalburgWoods_Text_ImOutOfPokeBalls:
 	.string "Now I'm out of POKé BALLS.$"
 
 PetalburgWoods_Text_InstantlyPopularWithBugPokemon:
-	.string "If you bring weed to school,\n"
+	.string "If you take BUG POKéMON to school,\n"
 	.string "you get to be instantly popular!$"
 
 PetalburgWoods_Text_CantBePopularIfILose:
 	.string "I can't be popular if I lose.$"
 
 PetalburgWoods_Text_PeopleRespectYou:
-	.string "If you possess a vast vernacular,\n"
+	.string "If you have a big BUG POKéMON,\n"
 	.string "people respect you for it.$"
 
 PetalburgWoods_Text_IWantRematch1:

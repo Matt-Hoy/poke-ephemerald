@@ -229,29 +229,11 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Aqua
 Double Battle: No
-AI: Smart Trainer
+AI: Check Bad Move
 
-Poochyena @ ITEM_QUICK_CLAW
+Poochyena
 Level: 9
-Nature: Adamant
-Ability: ABILITY_QUICK_FEET
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-
-Scraggy @ ITEM_ORAN_BERRY
-Level: 9
-Nature: Adamant
-Ability: ABILITY_INTIMIDATE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-
-Sableye @ ITEM_LEFTOVERS
-Level: 10
-Nature: Hardy
-Ability: ABILITY_PRANKSTER
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_WILL_O_WISP
-- MOVE_TOXIC
-- MOVE_SUBSTITUTE
-- MOVE_PROTECT
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MARCEL ===
 Name: MARCEL
@@ -2144,19 +2126,19 @@ AI: Smart Trainer
 Wooloo @ ITEM_SILK_SCARF
 Level: 8
 Nature: Adamant
-Ability: ABILITY_FLUFFY
+Ability: Fluffy
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Chikorita @ ITEM_MIRACLE_SEED
 Level: 8
 Nature: Adamant
-Ability: ABILITY_PIXILATE
+Ability: Pixilate
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Axew @ ITEM_BLACK_GLASSES
 Level: 8
 Nature: Adamant
-Ability: ABILITY_DEFIANT
+Ability: Defiant
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 === TRAINER_DAPHNE ===
@@ -5988,9 +5970,6 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Metapod
 Level: 7
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_TACKLE
-- MOVE_STRING_SHOT
-- MOVE_HARDEN
 
 Scraggy
 Level: 7
@@ -11337,22 +11316,23 @@ Pic: Bug Catcher
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Basic Trainer
+AI: Check Bad Move
 
-Kakuna
-Level: 8
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_POISON_STING
-- MOVE_STRING_SHOT
-- MOVE_HARDEN
+Wurmple
+Level: 3
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Seedot
-Level: 8
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Wurmple
+Level: 3
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Sizzlipede
-Level: 9
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Wurmple
+Level: 3
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Wurmple
+Level: 3
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_JOSE ===
 Name: JOSE
@@ -11420,35 +11400,25 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_JAMES_1 ===
 Name: JAMES
-Class: TRAINER_CLASS_RICH_BOY
-Pic: TRAINER_PIC_RICH_BOY
+Class: Bug Catcher
+Pic: Bug Catcher
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Basic Trainer
+AI: Check Bad Move
 
-Skwovet
-Level: 10
-Nature: Adamant
-Ability: ABILITY_CHEEK_POUCH
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Nincada
+Level: 6
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Honedge
-Level: 10
-Nature: Adamant
-Ability: ABILITY_NO_GUARD
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-
-Litwick
-Level: 10
-Nature: Modest
-Ability: ABILITY_FLASH_FIRE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Nincada
+Level: 6
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_JAMES_2 ===
 Name: JAMES
-Class: TRAINER_CLASS_RICH_BOY
-Pic: TRAINER_PIC_RICH_BOY
+Class: Bug Catcher
+Pic: Bug Catcher
 Gender: Male
 Music: Male
 Double Battle: No
@@ -11460,8 +11430,8 @@ IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
 === TRAINER_JAMES_3 ===
 Name: JAMES
-Class: TRAINER_CLASS_RICH_BOY
-Pic: TRAINER_PIC_RICH_BOY
+Class: Bug Catcher
+Pic: Bug Catcher
 Gender: Male
 Music: Male
 Double Battle: No
@@ -11477,8 +11447,8 @@ IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 
 === TRAINER_JAMES_4 ===
 Name: JAMES
-Class: TRAINER_CLASS_RICH_BOY
-Pic: TRAINER_PIC_RICH_BOY
+Class: Bug Catcher
+Pic: Bug Catcher
 Gender: Male
 Music: Male
 Double Battle: No
@@ -11498,8 +11468,8 @@ IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
 === TRAINER_JAMES_5 ===
 Name: JAMES
-Class: TRAINER_CLASS_RICH_BOY
-Pic: TRAINER_PIC_RICH_BOY
+Class: Bug Catcher
+Pic: Bug Catcher
 Gender: Male
 Music: Male
 Double Battle: No
