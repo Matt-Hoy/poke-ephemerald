@@ -5882,12 +5882,9 @@ Poochyena
 Level: 6
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
-Metapod
+Swirlix
 Level: 7
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- MOVE_TACKLE
-- MOVE_STRING_SHOT
-- MOVE_HARDEN
 
 Scraggy
 Level: 7
@@ -11298,6 +11295,9 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Metapod
 Level: 7
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_TACKLE
+- MOVE_STRING_SHOT
+- MOVE_HARDEN
 
 === TRAINER_LYLE ===
 Name: LYLE
