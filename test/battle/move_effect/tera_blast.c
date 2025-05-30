@@ -26,11 +26,11 @@ SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
     u32 species;
     u32 type;
 
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_FLYING;   }
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_POISON;   }
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_FIRE;     }
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_BUG;      }
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_ICE;      }
+    PARAMETRIZE { species = SPECIES_SUNKERN; type = TYPE_FLYING;   }
+    PARAMETRIZE { species = SPECIES_SUNKERN; type = TYPE_POISON;   }
+    PARAMETRIZE { species = SPECIES_SUNKERN; type = TYPE_FIRE;     }
+    PARAMETRIZE { species = SPECIES_SUNKERN; type = TYPE_BUG;      }
+    PARAMETRIZE { species = SPECIES_SUNKERN; type = TYPE_ICE;      }
     PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TYPE_GROUND;   }
     PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TYPE_ROCK;     }
     PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TYPE_WATER;    }
@@ -46,8 +46,8 @@ SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
     PARAMETRIZE { species = SPECIES_ABRA;      type = TYPE_DARK;     }
 
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[0] == TYPE_GRASS);
-        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[1] == TYPE_GRASS);
+        ASSUME(gSpeciesInfo[SPECIES_SUNKERN].types[0] == TYPE_GRASS);
+        ASSUME(gSpeciesInfo[SPECIES_SUNKERN].types[1] == TYPE_GRASS);
         ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[0] == TYPE_FIRE);
         ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[1] == TYPE_FIRE);
         ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[0] == TYPE_GHOST);
