@@ -12042,7 +12042,7 @@ F_TRAINER_FEMALE |
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 4875
-                MOVE_ROCK_SLIDE,
+                MOVE_ROCK_THROW,
                 MOVE_METAL_CLAW,
                 MOVE_PROTECT,
                 MOVE_MAGNET_RISE,
