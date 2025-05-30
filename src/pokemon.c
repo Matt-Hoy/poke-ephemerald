@@ -5621,6 +5621,21 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
     }
 }
 
+bool8 PartyCanLearnMove(u16 move)
+{
+    int i;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (!species)
+            break;
+        if (CanLearnTeachableMove(species, move)) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[4];
