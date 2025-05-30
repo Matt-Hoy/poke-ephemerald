@@ -240,6 +240,11 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Follower;
 
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Venusaurite;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blastoisinite;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharizarditeX;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharizarditeY;
+
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bard;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hipster;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Trader;
@@ -490,6 +495,10 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_HOOH] =                     &gObjectEventGraphicsInfo_HoOh,
     [OBJ_EVENT_GFX_POKE_BALL] =                &gObjectEventGraphicsInfo_PokeBall,
     [OBJ_EVENT_GFX_OW_MON] =                   &gObjectEventGraphicsInfo_Follower,
+    [OBJ_EVENT_GFX_VENUSAURITE] =              &gObjectEventGraphicsInfo_Venusaurite,
+    [OBJ_EVENT_GFX_BLASTOISINITE] =            &gObjectEventGraphicsInfo_Blastoisinite,
+    [OBJ_EVENT_GFX_CHARIZARDITE_X] =           &gObjectEventGraphicsInfo_CharizarditeX,
+    [OBJ_EVENT_GFX_CHARIZARDITE_Y] =           &gObjectEventGraphicsInfo_CharizarditeY,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {
