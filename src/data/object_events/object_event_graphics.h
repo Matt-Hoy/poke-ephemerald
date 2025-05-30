@@ -389,6 +389,11 @@ const u16 gObjectEventPal_Substitute[] = INCBIN_U16("graphics/pokemon/question_m
 
 const u16 gObjectEventPaletteEmotes[] = INCBIN_U16("graphics/misc/emotes.gbapal");
 
+const u16 gObjectEventPal_Venusaurite[] = INCBIN_U16("graphics/object_events/palettes/Venusaurite.gbapal");
+const u16 gObjectEventPal_Blastoisinite[] = INCBIN_U16("graphics/object_events/palettes/Blastoisinite.gbapal");
+const u16 gObjectEventPal_CharizarditeX[] = INCBIN_U16("graphics/object_events/palettes/CharizarditeX.gbapal");
+const u16 gObjectEventPal_CharizarditeY[] = INCBIN_U16("graphics/object_events/palettes/CharizarditeY.gbapal");
+
 #if OW_FOLLOWERS_POKEBALLS
 const u32 gObjectEventPic_MasterBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_master.4bpp");
 const u32 gObjectEventPic_UltraBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_ultra.4bpp");
