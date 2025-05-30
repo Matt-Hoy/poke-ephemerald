@@ -2408,6 +2408,7 @@ extern const u8 gText_ExpShareOff[];
 // Infinite Repel
 extern const u8 gText_InfiniteRepelOn[];
 extern const u8 gText_InfiniteRepelOff[];
+extern const u8 gText_PortaCenterHeal[];
 
 extern const u8 gText_BasePointsResetToZero[];
 
