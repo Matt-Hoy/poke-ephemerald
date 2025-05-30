@@ -2551,17 +2551,25 @@ IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
 === TRAINER_WINSTON_1 ===
 Name: WINSTON
-Class: Rich Boy
-Pic: Rich Boy
+Class: TRAINER_CLASS_BUG_CATCHER
+Pic: TRAINER_PIC_BUG_CATCHER
 Gender: Male
-Music: Rich
+Music: Male
 Items: Full Restore
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Zigzagoon @ Nugget
-Level: 7
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Butterfree
+Level: 10
+Nature: Modest
+Ability: ABILITY_COMPOUND_EYES
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+
+Beedrill
+Level: 10
+Nature: Adamant
+Ability: ABILITY_SWARM
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 === TRAINER_MOLLIE ===
 Name: MOLLIE
@@ -2596,10 +2604,10 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_WINSTON_2 ===
 Name: WINSTON
-Class: Rich Boy
-Pic: Rich Boy
+Class: TRAINER_CLASS_BUG_CATCHER
+Pic: TRAINER_PIC_BUG_CATCHER
 Gender: Male
-Music: Rich
+Music: Male
 Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
@@ -2610,10 +2618,10 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_WINSTON_3 ===
 Name: WINSTON
-Class: Rich Boy
-Pic: Rich Boy
+Class: TRAINER_CLASS_BUG_CATCHER
+Pic: TRAINER_PIC_BUG_CATCHER
 Gender: Male
-Music: Rich
+Music: Male
 Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
@@ -2624,10 +2632,10 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_WINSTON_4 ===
 Name: WINSTON
-Class: Rich Boy
-Pic: Rich Boy
+Class: TRAINER_CLASS_BUG_CATCHER
+Pic: TRAINER_PIC_BUG_CATCHER
 Gender: Male
-Music: Rich
+Music: Male
 Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
@@ -2638,10 +2646,10 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_WINSTON_5 ===
 Name: WINSTON
-Class: Rich Boy
-Pic: Rich Boy
+Class: TRAINER_CLASS_BUG_CATCHER
+Pic: TRAINER_PIC_BUG_CATCHER
 Gender: Male
-Music: Rich
+Music: Male
 Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
@@ -6377,27 +6385,6 @@ Magikarp
 Level: 15
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-=== TRAINER_IVAN ===
-Name: IVAN
-Class: Fisherman
-Pic: Fisherman
-Gender: Male
-Music: Hiker
-Double Battle: No
-AI: Check Bad Move
-
-Magikarp
-Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Magikarp
-Level: 6
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Magikarp
-Level: 7
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
 === TRAINER_CLAUDE ===
 Name: CLAUDE
 Class: Fisherman
@@ -8858,18 +8845,27 @@ IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 Name: GINA & MIA
 Class: Twins
 Pic: Twins
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
-AI: Check Bad Move
+AI: Smart Trainer
 
-Seedot
-Level: 6
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Dedenne @ ITEM_ORAN_BERRY
+Level: 10
+Nature: Modest
+Ability: ABILITY_CHEEK_POUCH
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_ELECTROWEB
+- MOVE_FAIRY_WIND
 
-Lotad
-Level: 6
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Togedemaru @ ITEM_LUM_BERRY
+Level: 10
+Nature: Adamant
+Ability: ABILITY_STURDY
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_NUZZLE
+- MOVE_METAL_CLAW
+- MOVE_HELPING_HAND
 
 === TRAINER_MIU_AND_YUKI ===
 Name: MIU & YUKI
@@ -11122,23 +11118,6 @@ Poipole
 Level: 7
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
-=== TRAINER_HALEY_1 ===
-Name: HALEY
-Class: Lass
-Pic: Lass
-Gender: Female
-Music: Female
-Double Battle: No
-AI: Check Bad Move
-
-Lotad
-Level: 6
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Shroomish
-Level: 6
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
 === TRAINER_JANICE ===
 Name: JANICE
 Class: Lass
@@ -11423,7 +11402,7 @@ Name: JAMES
 Class: TRAINER_CLASS_RICH_BOY
 Pic: TRAINER_PIC_RICH_BOY
 Gender: Male
-Music: Male
+Music: Rich
 Double Battle: No
 AI: Basic Trainer
 
