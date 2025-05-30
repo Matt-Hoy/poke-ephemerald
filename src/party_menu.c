@@ -3035,16 +3035,7 @@ u16 MoveToFlag(u16 move)
 
 bool8 CanUseFieldMove(u16 species, u16 move)
 {
-    u16 id = MoveToFlag(move);
-    if (!FlagGet(id))
-    {
-        return FALSE;
-    }
-    if (CanLearnTeachableMove(species, move) && PlayerHasMove(move))
-    {
-        return TRUE;
-    }
-    return FALSE;
+    return (FlagGet(MoveToFlag(move)) && CanLearnTeachableMove(species, move) && PlayerHasMove(move));
 }
 
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
@@ -3058,9 +3049,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     for (j = 0; j < 8; j++)
     {
         u16 move = sFieldMoves[j];
-        u16 id = MoveToFlag(move);
-
-        if (FlagGet(id) && CanLearnTeachableMove(species, move) && PlayerHasMove(move))
+        if (CanUseFieldMove(species, move))
         {
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + MENU_FIELD_MOVES);
         }
