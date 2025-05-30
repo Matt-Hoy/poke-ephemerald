@@ -338,11 +338,39 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Aqua
 Double Battle: No
-AI: Check Bad Move
+AI: Smart Trainer
 
-Poochyena
-Level: 11
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Poochyena @ ITEM_QUICK_CLAW
+Level: 14
+Nature: Adamant
+Ability: ABILITY_QUICK_FEET
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+
+Scraggy @ ITEM_ORAN_BERRY
+Level: 14
+Nature: Adamant
+Ability: ABILITY_INTIMIDATE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+
+Sableye @ ITEM_LEFTOVERS
+Level: 14
+Nature: Hardy
+Ability: ABILITY_PRANKSTER
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_WILL_O_WISP
+- MOVE_TOXIC
+- MOVE_SUBSTITUTE
+- MOVE_PROTECT
+
+Turtonator @ ITEM_CHARCOAL
+Level: 15
+Nature: Modest
+Ability: ABILITY_SHELL_ARMOR
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_EMBER
+- MOVE_SMOG
+- MOVE_ENDURE
+- MOVE_PROTECT
 
 === TRAINER_GRUNT_WEATHER_INST_1 ===
 Name: GRUNT
@@ -12876,13 +12904,35 @@ Music: Rich
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon @ Nugget
-Level: 8
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Elekid
+Level: 14
+Nature: Modest
+Ability: ABILITY_STATIC
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_THUNDER_SHOCK
+- MOVE_CHARGE
+- MOVE_LEER
+- MOVE_QUICK_ATTACK
 
-Poochyena
-Level: 8
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Komala
+Level: 15
+Nature: Hardy
+Ability: ABILITY_COMATOSE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_STOCKPILE
+- MOVE_SPIT_UP
+- MOVE_SWALLOW
+- MOVE_RAPID_SPIN
+
+Sandile
+Level: 15
+Nature: Adamant
+Ability: ABILITY_INTIMIDATE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- MOVE_BITE
+- MOVE_SAND_TOMB
+- MOVE_LEER
+- MOVE_HONE_CLAWS
 
 === TRAINER_SARAH ===
 Name: SARAH
