@@ -2044,17 +2044,12 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "species": "SPECIES_NACLI"
               },
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_ARON"
+                "species": "SPECIES_ROGGENROLA"
               },
               {
                 "min_level": 11,
@@ -2064,7 +2059,7 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "species": "SPECIES_BONSLY"
               },
               {
                 "min_level": 11,
@@ -2079,7 +2074,12 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "species": "SPECIES_DUNSPARCE"
+              },
+              {
+                "min_level": 11,
+                "max_level": 13,
+                "species": "SPECIES_TRUBBISH"
               },
               {
                 "min_level": 11,
@@ -2113,17 +2113,12 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "species": "SPECIES_NACLI"
               },
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_ARON"
+                "species": "SPECIES_ROGGENROLA"
               },
               {
                 "min_level": 11,
@@ -2133,7 +2128,7 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "species": "SPECIES_BONSLY"
               },
               {
                 "min_level": 11,
@@ -2148,7 +2143,12 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "species": "SPECIES_DUNSPARCE"
+              },
+              {
+                "min_level": 11,
+                "max_level": 13,
+                "species": "SPECIES_TRUBBISH"
               },
               {
                 "min_level": 11,
@@ -2512,17 +2512,12 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "species": "SPECIES_NACLI"
               },
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_ARON"
+                "species": "SPECIES_ROGGENROLA"
               },
               {
                 "min_level": 11,
@@ -2532,7 +2527,7 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "species": "SPECIES_BONSLY"
               },
               {
                 "min_level": 11,
@@ -2547,7 +2542,12 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "species": "SPECIES_DUNSPARCE"
+              },
+              {
+                "min_level": 11,
+                "max_level": 13,
+                "species": "SPECIES_TRUBBISH"
               },
               {
                 "min_level": 11,
@@ -4670,17 +4670,12 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_BALTOY"
+                "species": "SPECIES_NACLI"
               },
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_STONJOURNER"
-              },
-              {
-                "min_level": 11,
-                "max_level": 13,
-                "species": "SPECIES_ARON"
+                "species": "SPECIES_ROGGENROLA"
               },
               {
                 "min_level": 11,
@@ -4690,7 +4685,7 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "species": "SPECIES_BONSLY"
               },
               {
                 "min_level": 11,
@@ -4705,7 +4700,12 @@
               {
                 "min_level": 11,
                 "max_level": 13,
-                "species": "SPECIES_MANKEY"
+                "species": "SPECIES_DUNSPARCE"
+              },
+              {
+                "min_level": 11,
+                "max_level": 13,
+                "species": "SPECIES_TRUBBISH"
               },
               {
                 "min_level": 11,
