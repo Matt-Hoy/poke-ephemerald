@@ -468,6 +468,7 @@ static u32 ChooseMoveOrAction_Singles(u32 battlerAi)
         return AI_CHOICE_FLEE;
     if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
         return AI_CHOICE_WATCH;
+
     numOfBestMoves = 1;
     // DebugPrintf("INITIALIZER Score: %d", AI_THINKING_STRUCT->score[0]);
     currentMoveArray[0] = AI_THINKING_STRUCT->score[0];
@@ -572,12 +573,6 @@ static u32 ChooseMoveOrAction_Doubles(u32 battlerAi)
                 }
                 actionOrMoveIndex[i] = mostViableMovesIndices[Random() % mostViableMovesNo];
                 bestMovePointsForTarget[i] = mostViableMovesScores[0];
-
-                // Don't use a move against ally if it has less than 100 points.
-                if (i == BATTLE_PARTNER(battlerAi) && bestMovePointsForTarget[i] < AI_SCORE_DEFAULT)
-                {
-                    bestMovePointsForTarget[i] = -1;
-                }
             }
 
             for (j = 0; j < MAX_MON_MOVES; j++)
@@ -629,6 +624,7 @@ static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u3
     // DebugPrintf("Entering BattleAI_DoAIProcessing");
     do
     {
+        // DebugPrintf("Beginning Loop");
         // If the given move has PP, consider a move
         if (gBattleMons[battlerAi].pp[aiThink->movesetIndex] == 0)
         {
