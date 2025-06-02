@@ -84,11 +84,7 @@ bool32 BattlerHasAi(u32 battlerId)
 
 bool32 IsAiBattlerAware(u32 battlerId)
 {
-    if (AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT] & AI_FLAG_OMNISCIENT
-     || AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_RIGHT] & AI_FLAG_OMNISCIENT)
-        return TRUE;
-
-    return BattlerHasAi(battlerId);
+    return TRUE;
 }
 
 bool32 IsAiBattlerPredictingAbility(u32 battlerId)
@@ -3977,9 +3973,7 @@ void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
     if (AI_CanBurn(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
     {
-        if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL)
-            || (!(AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_OMNISCIENT) // Not Omniscient but expects physical attacker
-                && gSpeciesInfo[gBattleMons[battlerDef].species].baseAttack >= gSpeciesInfo[gBattleMons[battlerDef].species].baseSpAttack + 10))
+        if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
         {
             if (GetMoveCategory(GetBestDmgMoveFromBattler(battlerDef, battlerAtk)) == DAMAGE_CATEGORY_PHYSICAL)
                 ADJUST_SCORE_PTR(DECENT_EFFECT);
@@ -4017,10 +4011,6 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
 void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 {
-    if (((AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0) && GetMoveEffect(GetBestDmgMoveFromBattler(battlerAtk, battlerDef)) != EFFECT_FOCUS_PUNCH)
-            || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_SLP || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
-        return;
-
     if (AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove))
         ADJUST_SCORE_PTR(DECENT_EFFECT);
     else
@@ -4061,9 +4051,7 @@ void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
 
     if (AI_CanGiveFrostbite(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
     {
-        if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL)
-            || (!(AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_OMNISCIENT) // Not Omniscient but expects special attacker
-                && gSpeciesInfo[gBattleMons[battlerDef].species].baseSpAttack >= gSpeciesInfo[gBattleMons[battlerDef].species].baseAttack + 10))
+        if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL))
         {
             if (GetMoveCategory(GetBestDmgMoveFromBattler(battlerDef, battlerAtk)) == DAMAGE_CATEGORY_SPECIAL)
                 ADJUST_SCORE_PTR(DECENT_EFFECT);

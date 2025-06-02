@@ -66,6 +66,9 @@ AI_SINGLE_BATTLE_TEST("AI doesn't use accuracy-lowering moves if it knows that t
                 }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        if (abilityAI == ABILITY_MOLD_BREAKER) { ANIMATION(ANIM_TYPE_MOVE, moveAI, opponent); }
+        if (abilityAI == ABILITY_MOLD_BREAKER) 
+        { 
+            ANIMATION(ANIM_TYPE_MOVE, moveAI, opponent); 
+        }
     }
 }

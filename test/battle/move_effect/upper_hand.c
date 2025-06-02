@@ -128,7 +128,14 @@ AI_SINGLE_BATTLE_TEST("AI won't use Upper Hand unless it has seen a priority mov
         PLAYER(SPECIES_WOBBUFFET) {Moves(move); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_UPPER_HAND, MOVE_KARATE_CHOP); }
     } WHEN {
-        TURN { MOVE(player, move); EXPECT_MOVE(opponent, MOVE_KARATE_CHOP); }
-        TURN { MOVE(player, move); EXPECT_MOVE(opponent, move == MOVE_QUICK_ATTACK ? MOVE_UPPER_HAND : MOVE_KARATE_CHOP); }
+        TURN { MOVE(player, move); SCORE_LT(opponent, MOVE_UPPER_HAND, MOVE_KARATE_CHOP, target:player); }
+        TURN 
+        {
+            MOVE(player, move); 
+            if (move == MOVE_QUICK_ATTACK)
+                SCORE_GT(opponent, MOVE_UPPER_HAND, MOVE_KARATE_CHOP, target:player);
+            else
+                SCORE_LT(opponent, MOVE_UPPER_HAND, MOVE_KARATE_CHOP, target:player);
+        }
     }
 }
