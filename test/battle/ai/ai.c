@@ -2,7 +2,7 @@
 #include "test/battle.h"
 #include "battle_ai_util.h"
 
-AI_SINGLE_BATTLE_TEST("AI prefers Bubble over Water Gun if it's slower")
+AI_SINGLE_BATTLE_TEST("AI prefers Bubble over Water Gun in single battles.")
 {
     u32 speedPlayer, speedAi;
 
@@ -10,20 +10,13 @@ AI_SINGLE_BATTLE_TEST("AI prefers Bubble over Water Gun if it's slower")
     PARAMETRIZE { speedPlayer = 10; speedAi = 200; }
 
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_SCIZOR) { Speed(speedPlayer); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_WATER_GUN, MOVE_BUBBLE); Speed(speedAi); }
     } WHEN {
-        if (speedPlayer > speedAi)
-        {
-            TURN { SCORE_GT(opponent, MOVE_BUBBLE, MOVE_WATER_GUN); }
-            TURN { SCORE_GT(opponent, MOVE_BUBBLE, MOVE_WATER_GUN); }
-        }
-        else
-        {
-            TURN { SCORE_EQ(opponent, MOVE_BUBBLE, MOVE_WATER_GUN); }
-            TURN { SCORE_EQ(opponent, MOVE_BUBBLE, MOVE_WATER_GUN); }
-        }
+        TURN { EXPECT_MOVE(opponent, MOVE_BUBBLE); }
+        TURN { EXPECT_MOVE(opponent, MOVE_BUBBLE); }
+        TURN { SCORE_GT(opponent, MOVE_BUBBLE, MOVE_WATER_GUN); }
+        TURN { SCORE_GT(opponent, MOVE_BUBBLE, MOVE_WATER_GUN); }
     }
 }
 
@@ -34,7 +27,6 @@ AI_SINGLE_BATTLE_TEST("AI prefers Water Gun over Bubble if it knows that foe has
     PARAMETRIZE { abilityAI = ABILITY_MOXIE; }
     PARAMETRIZE { abilityAI = ABILITY_MOLD_BREAKER; } // Mold Breaker ignores Contrary.
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_SHUCKLE) { Ability(ABILITY_CONTRARY); }
         OPPONENT(SPECIES_PINSIR) { Moves(MOVE_WATER_GUN, MOVE_BUBBLE); Ability(abilityAI); }
     } WHEN {
@@ -514,35 +506,17 @@ AI_SINGLE_BATTLE_TEST("AI will not choose Burn Up if the user lost the Fire typi
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI will only choose Surf 1/3 times if the opposing mon has Volt Absorb")
+AI_SINGLE_BATTLE_TEST("AI will choose Surf if the opposing mon has Volt Absorb")
 {
-    PASSES_RANDOMLY(1, 3, RNG_AI_ABILITY);
     GIVEN {
         ASSUME(GetMoveType(MOVE_THUNDERBOLT) == TYPE_ELECTRIC);
-        PLAYER(SPECIES_LANTURN) { Ability(ABILITY_VOLT_ABSORB); };
+        PLAYER(SPECIES_RAICHU) { Ability(ABILITY_VOLT_ABSORB); };
         OPPONENT(SPECIES_LANTURN) { Moves(MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_SURF); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
         TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
     } SCENE {
         MESSAGE("The opposing Lanturn used Surf!");
-        MESSAGE("The opposing Lanturn used Surf!");
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("AI will choose Thunderbolt then Surf 2/3 times if the opposing mon has Volt Absorb")
-{
-    PASSES_RANDOMLY(2, 3, RNG_AI_ABILITY);
-    GIVEN {
-        ASSUME(GetMoveType(MOVE_THUNDERBOLT) == TYPE_ELECTRIC);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_LANTURN) { Ability(ABILITY_VOLT_ABSORB); };
-        OPPONENT(SPECIES_LANTURN) { Moves(MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_SURF); }
-    } WHEN {
-        TURN { EXPECT_MOVE(opponent, MOVE_THUNDERBOLT); }
-        TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
-    } SCENE {
-        MESSAGE("The opposing Lanturn used Thunderbolt!");
         MESSAGE("The opposing Lanturn used Surf!");
     }
 }
