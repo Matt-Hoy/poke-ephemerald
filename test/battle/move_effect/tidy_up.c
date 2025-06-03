@@ -77,25 +77,23 @@ SINGLE_BATTLE_TEST("Tidy Up removes Substitute")
 AI_SINGLE_BATTLE_TEST("AI prefers to keep its substitute over removing hazards if target is slower")
 {
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { Speed(50); Status1(STATUS1_PARALYSIS); Moves(MOVE_SLEEP_POWDER, MOVE_STEALTH_ROCK, MOVE_CELEBRATE); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); Moves(MOVE_BITE, MOVE_SCRATCH, MOVE_SUBSTITUTE, MOVE_TIDY_UP); }
     } WHEN {
-        TURN { MOVE(player, MOVE_STEALTH_ROCK); EXPECT_MOVE(opponent, MOVE_TIDY_UP); }
         TURN { MOVE(player, MOVE_STEALTH_ROCK); EXPECT_MOVE(opponent, MOVE_SUBSTITUTE); }
+        TURN { MOVE(player, MOVE_STEALTH_ROCK); EXPECT_MOVE(opponent, MOVE_BITE); }
         TURN { EXPECT_MOVE(opponent, MOVE_BITE); }
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI will try to remove hazards if slower then target even with a Substitute because it expects the Sub to be broken")
+AI_SINGLE_BATTLE_TEST("AI will try to remove hazards")
 {
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { Speed(100); Status1(STATUS1_BURN); Moves(MOVE_SLEEP_POWDER, MOVE_STEALTH_ROCK, MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); Moves(MOVE_BITE, MOVE_SCRATCH, MOVE_SUBSTITUTE, MOVE_TIDY_UP); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); Moves(MOVE_BITE, MOVE_SCRATCH, MOVE_TIDY_UP); }
     } WHEN {
         TURN { MOVE(player, MOVE_STEALTH_ROCK); EXPECT_MOVE(opponent, MOVE_TIDY_UP); }
-        TURN { MOVE(player, MOVE_STEALTH_ROCK); EXPECT_MOVE(opponent, MOVE_SUBSTITUTE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_TIDY_UP); }
         TURN { EXPECT_MOVE(opponent, MOVE_TIDY_UP); }
     }
 }

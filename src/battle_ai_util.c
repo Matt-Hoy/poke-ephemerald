@@ -4269,6 +4269,7 @@ u32 IncreaseSubstituteMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
 
     if (AI_DATA->hpPercents[battlerAtk] > 70)
         scoreIncrease += WEAK_EFFECT;
+    // DebugPrintf("Score Increase: %d", scoreIncrease);
     return scoreIncrease;
 }
 
