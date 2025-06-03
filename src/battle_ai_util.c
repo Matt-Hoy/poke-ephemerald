@@ -1188,6 +1188,8 @@ u32 GetBestDmgMoveFromBattler(u32 battlerAtk, u32 battlerDef)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
+        // DebugPrintf("Moves[i]: %d", moves[i]);
+        // DebugPrintf("Dmg[i]: %d", AI_DATA->simulatedDmg[battlerAtk][battlerDef][i].expected);
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(unusable & (1u << i))
             && bestDmg < AI_DATA->simulatedDmg[battlerAtk][battlerDef][i].expected)
         {

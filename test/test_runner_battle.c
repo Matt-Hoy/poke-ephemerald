@@ -1779,10 +1779,6 @@ void Moves_(u32 sourceLine, u16 moves[MAX_MON_MOVES])
         u32 pp = GetMovePP(moves[i]);
         SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &pp);
     }
-    DebugPrintf("MOVE 1 in MOVES_: %d", GetMonData(DATA.currentMon, MON_DATA_MOVE1));
-    DebugPrintf("MOVE 2 in MOVES_: %d", GetMonData(DATA.currentMon, MON_DATA_MOVE2));
-    DebugPrintf("MOVE 3 in MOVES_: %d", GetMonData(DATA.currentMon, MON_DATA_MOVE3));
-    DebugPrintf("MOVE 4 in MOVES_: %d", GetMonData(DATA.currentMon, MON_DATA_MOVE4));
     DATA.explicitMoves[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
 }
 
