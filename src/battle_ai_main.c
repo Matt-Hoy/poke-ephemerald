@@ -2981,7 +2981,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_ENTRAINMENT:
                 if (partnerHasBadAbility && IsAbilityOfRating(aiData->abilities[battlerAtk], 0))
                 {
-                    RETURN_SCORE_PLUS(DECENT_EFFECT);
+                    RETURN_SCORE_PLUS(5);
                 }
                 break;
             case EFFECT_SOAK:
