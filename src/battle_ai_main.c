@@ -672,26 +672,22 @@ static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u3
 
 static s32 CalculateEngineMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
 {
-    // DebugPrintf("Move Considered: %d", move);
-    // DebugPrintf("Entering CalculateEngineMoveScore");
+    DebugPrintf("Move Considered: %d", move);
     CalcBattlerAiMovesData(AI_DATA, battlerAtk, battlerDef, AI_GetWeather());
     s32 finalScore = AI_CheckBadMove(battlerAtk, battlerDef, move, 0);
-    
     if (finalScore < 0)
     {
-        // DebugPrintf("Not checking subsequent functions: %d", finalScore);
+        DebugPrintf("Not checking subsequent functions: %d", finalScore);
         return finalScore;
     }
-    // DebugPrintf("Not considered a bad move: %d", finalScore);
-    // DebugPrintf("finalScore before TrytoFaint: %d", finalScore);
     finalScore += AI_TryToFaint(battlerAtk, battlerDef, move);
-    // DebugPrintf("finalScore after TrytoFaint: %d", finalScore);
+    DebugPrintf("finalScore after TrytoFaint: %d", finalScore);
     finalScore = AI_CheckViability(battlerAtk, battlerDef, move, finalScore);
-    // DebugPrintf("finalScore after CheckViability: %d", finalScore);
+    DebugPrintf("finalScore after CheckViability: %d", finalScore);
     if (IsValidDoubleBattle(battlerAtk))
         finalScore = AI_DoubleBattle(battlerAtk, battlerDef, move, finalScore);
     
-    // DebugPrintf("finalScore after DoubleBattle: %d", finalScore);
+    DebugPrintf("finalScore after DoubleBattle: %d", finalScore);
     return finalScore;
 }
 
@@ -901,7 +897,10 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                     break;
                 }
 
-                if (GetBattlerMoveTargetType(battlerAtk, move) == MOVE_TARGET_FOES_AND_ALLY && IsBattlerAlive(BATTLE_PARTNER(battlerAtk)))
+                if (GetBattlerMoveTargetType(battlerAtk, move) == MOVE_TARGET_FOES_AND_ALLY 
+                && IsBattlerAlive(BATTLE_PARTNER(battlerAtk)) 
+                && aiData->abilities[BATTLE_PARTNER(battlerAtk)] != ABILITY_TELEPATHY
+                && aiData->effectiveness[battlerAtk][BATTLE_PARTNER(battlerAtk)][AI_THINKING_STRUCT->movesetIndex] != 0.0)
                 {
                     switch (aiData->abilities[BATTLE_PARTNER(battlerAtk)])
                     {
@@ -5032,7 +5031,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     // DebugPrintf("Score before effect scores: %d", score);
 
     ADJUST_SCORE(AI_CalcMoveEffectScore(battlerAtk, battlerDef, move));
-    // DebugPrintf("Score after effect score: %d", score);
+    DebugPrintf("Score after effect score: %d", score);
     ADJUST_SCORE(AI_CalcHoldEffectMoveScore(battlerAtk, battlerDef, move));
 
     return score;

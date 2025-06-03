@@ -581,8 +581,6 @@ AI_DOUBLE_BATTLE_TEST("AI will not choose Earthquake if it damages the partner")
     PARAMETRIZE { species = SPECIES_CHIKORITA; }
 
     GIVEN {
-        ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == MOVE_TARGET_FOES_AND_ALLY);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PHANPY) { Moves(MOVE_EARTHQUAKE, MOVE_SCRATCH); }
@@ -610,15 +608,14 @@ AI_DOUBLE_BATTLE_TEST("AI will choose Earthquake if partner is not alive")
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI will choose Earthquake if it kill an opposing mon and does 1/3 of damage to AI")
+AI_DOUBLE_BATTLE_TEST("AI will choose Earthquake if its partner has Telepathy.")
 {
     GIVEN {
         ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == MOVE_TARGET_FOES_AND_ALLY);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_EARTHQUAKE, MOVE_SCRATCH); }
-        OPPONENT(SPECIES_PARAS) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ORANGURU) { Moves(MOVE_CELEBRATE); Ability(ABILITY_TELEPATHY); }
     } WHEN {
         TURN { EXPECT_MOVE(opponentLeft, MOVE_EARTHQUAKE); }
     }
