@@ -1771,6 +1771,7 @@ void Moves_(u32 sourceLine, u16 moves[MAX_MON_MOVES])
     INVALID_IF(!DATA.currentMon, "Moves outside of PLAYER/OPPONENT");
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
+        // DebugPrintf("MOVE in MOVES_: %d", moves[i]);
         if (moves[i] == MOVE_NONE)
             break;
         INVALID_IF(moves[i] >= MOVES_COUNT, "Illegal move: %d", moves[i]);
@@ -1778,6 +1779,10 @@ void Moves_(u32 sourceLine, u16 moves[MAX_MON_MOVES])
         u32 pp = GetMovePP(moves[i]);
         SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &pp);
     }
+    DebugPrintf("MOVE 1 in MOVES_: %d", GetMonData(DATA.currentMon, MON_DATA_MOVE1));
+    DebugPrintf("MOVE 2 in MOVES_: %d", GetMonData(DATA.currentMon, MON_DATA_MOVE2));
+    DebugPrintf("MOVE 3 in MOVES_: %d", GetMonData(DATA.currentMon, MON_DATA_MOVE3));
+    DebugPrintf("MOVE 4 in MOVES_: %d", GetMonData(DATA.currentMon, MON_DATA_MOVE4));
     DATA.explicitMoves[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
 }
 
@@ -2077,6 +2082,7 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
 {
     u32 i;
     struct Pokemon *mon = CurrentMon(battlerId);
+    // DebugPrintf("HERE IN THE EXPLICIT CELEBRATE SHIT");
 
     if (ctx->explicitMove)
     {

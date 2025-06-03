@@ -347,6 +347,11 @@ static void CalcBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u
     u32 moveIndex, move;
     u32 rollType = GetDmgRollType(battlerAtk);
     u16 *moves = GetMovesArray(battlerAtk);
+    u8 i;
+    for (i = 0; i < 4; i++)
+    {
+        DebugPrintf("Move Later: %d", gBattleMons[battlerAtk].moves[i]);
+    }
 
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
@@ -354,12 +359,14 @@ static void CalcBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u
         uq4_12_t effectiveness = Q_4_12(0.0);
         move = moves[moveIndex];
 
+        // DebugPrintf("Move: %d", move);
         if (move != MOVE_NONE
             && move != MOVE_UNAVAILABLE
             //&& !IsBattleMoveStatus(move)  /* we want to get effectiveness and accuracy of status moves */
             && !(aiData->moveLimitations[battlerAtk] & (1u << moveIndex)))
         {
             dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, TRUE, weather, rollType);
+            // DebugPrintf("Simulated DMG: %d", dmg);
             aiData->moveAccuracy[battlerAtk][battlerDef][moveIndex] = Ai_SetMoveAccuracy(aiData, battlerAtk, battlerDef, move);
         }
         aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex] = dmg;
@@ -384,6 +391,12 @@ static void SetBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u3
         CalcBattlerAiMovesData(aiData, battlerAtk, battlerDef, weather);
         RestoreBattlerData(battlerDef);
     }
+    u8 i;
+    // for (i = 0; i < ARRAY_COUNT(aiData->simulatedDmg[battlerAtk][battlerDef]); i++)
+    // {
+    //     DebugPrintf("Move: %d", GetMovesArray(battlerAtk)[i]);
+    //     DebugPrintf("Simulated Damage: %d", aiData->simulatedDmg[battlerAtk][battlerDef][i]);
+    // }
     RestoreBattlerData(battlerAtk);
 }
 
@@ -621,7 +634,7 @@ static inline bool32 ShouldConsiderMoveForBattler(u32 battlerAi, u32 battlerDef,
 
 static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u32 battlerAi, u32 battlerDef)
 {
-    // DebugPrintf("Entering BattleAI_DoAIProcessing");
+    DebugPrintf("Entering BattleAI_DoAIProcessing");
     do
     {
         // DebugPrintf("Beginning Loop");
@@ -635,7 +648,7 @@ static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u3
         {
             // DebugPrintf("MoveHasPP");
             aiThink->moveConsidered = gBattleMons[battlerAi].moves[aiThink->movesetIndex];
-            // DebugPrintf("Move Considered: %d", aiThink->moveConsidered);
+            DebugPrintf("Move Considered: %d", aiThink->moveConsidered);
         }
 
         if (aiThink->moveConsidered != MOVE_NONE
@@ -645,7 +658,7 @@ static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u3
             aiThink->score[aiThink->movesetIndex] = CalculateEngineMoveScore(battlerAi, 
                 battlerDef, 
                 aiThink->moveConsidered);
-            // DebugPrintf("Final Score: %d\n", aiThink->score[aiThink->movesetIndex]);
+            DebugPrintf("Final Score: %d\n", aiThink->score[aiThink->movesetIndex]);
         }
         else if (sDynamicAiFunc != NULL)
             aiThink->score[aiThink->movesetIndex] = sDynamicAiFunc(battlerAi,
@@ -675,13 +688,13 @@ static s32 CalculateEngineMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
     // DebugPrintf("Not considered a bad move: %d", finalScore);
     // DebugPrintf("finalScore before TrytoFaint: %d", finalScore);
     finalScore += AI_TryToFaint(battlerAtk, battlerDef, move);
-    // DebugPrintf("finalScore after TrytoFaint: %d", finalScore);
+    DebugPrintf("finalScore after TrytoFaint: %d", finalScore);
     finalScore = AI_CheckViability(battlerAtk, battlerDef, move, finalScore);
-    // DebugPrintf("finalScore after CheckViability: %d", finalScore);
+    DebugPrintf("finalScore after CheckViability: %d", finalScore);
     if (IsValidDoubleBattle(battlerAtk))
         finalScore = AI_DoubleBattle(battlerAtk, battlerDef, move, finalScore);
     
-    // DebugPrintf("finalScore after DoubleBattle: %d", finalScore);
+    DebugPrintf("finalScore after DoubleBattle: %d", finalScore);
     return finalScore;
 }
 
@@ -5022,6 +5035,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_SCORE(AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
         }
     }
+    DebugPrintf("Score before effect scores: %d", score);
 
     ADJUST_SCORE(AI_CalcMoveEffectScore(battlerAtk, battlerDef, move));
     ADJUST_SCORE(AI_CalcHoldEffectMoveScore(battlerAtk, battlerDef, move));

@@ -10,7 +10,7 @@ AI_SINGLE_BATTLE_TEST("AI prefers Bubble over Water Gun in single battles.")
     PARAMETRIZE { speedPlayer = 10; speedAi = 200; }
 
     GIVEN {
-        PLAYER(SPECIES_SCIZOR) { Speed(speedPlayer); }
+        PLAYER(SPECIES_SCIZOR) { Moves(MOVE_DISARMING_VOICE, MOVE_FLAME_BURST, MOVE_CELEBRATE); Speed(speedPlayer); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_WATER_GUN, MOVE_BUBBLE); Speed(speedAi); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_BUBBLE); }
