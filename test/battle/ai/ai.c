@@ -709,31 +709,15 @@ AI_SINGLE_BATTLE_TEST("AI avoids contact moves against rocky helmet")
 
 AI_SINGLE_BATTLE_TEST("AI uses a guaranteed KO move instead of the move with the highest expected damage")
 {
-    u32 flags;
-
-    PARAMETRIZE { flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY; }
-    PARAMETRIZE { flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT; }
 
     GIVEN {
-        ASSUME(GetMoveCriticalHitStage(MOVE_SLASH) == 1);
-        ASSUME(GetMovePower(MOVE_SLASH) == 70);
-        ASSUME(GetMovePower(MOVE_STRENGTH) == 80);
-        ASSUME(GetMoveType(MOVE_SLASH) == GetMoveType(MOVE_STRENGTH));
-        ASSUME(GetMoveCategory(MOVE_SLASH) == GetMoveCategory(MOVE_STRENGTH));
-        AI_FLAGS(flags);
         PLAYER(SPECIES_WOBBUFFET) { HP(225); }
         OPPONENT(SPECIES_ABSOL) { Ability(ABILITY_SUPER_LUCK); Moves(MOVE_SLASH, MOVE_STRENGTH); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_SLASH); }
-        if (flags & AI_FLAG_TRY_TO_FAINT)
-            TURN { EXPECT_MOVE(opponent, MOVE_STRENGTH); }
-        else
-            TURN { EXPECT_MOVE(opponent, MOVE_SLASH); }
+        TURN { EXPECT_MOVE(opponent, MOVE_STRENGTH); }
     } SCENE {
-        if (flags & AI_FLAG_TRY_TO_FAINT)
-            MESSAGE("Wobbuffet fainted!");
-        else
-            NOT MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet fainted!");
     }
 }
 

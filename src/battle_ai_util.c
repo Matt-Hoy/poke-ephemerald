@@ -1019,6 +1019,20 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
     return FALSE;
 }
 
+s32 AI_WhichMoveDealsMoreDamage(u32 moveOneIndex, u32 moveTwoIndex, u32 battlerAtk, u32 battlerDef)
+{
+    struct SimulatedDamage moveOneDamage = AI_DATA->simulatedDmg[battlerAtk][battlerDef][moveOneIndex];
+    struct SimulatedDamage moveTwoDamage = AI_DATA->simulatedDmg[battlerAtk][battlerDef][moveTwoIndex];
+    DebugPrintf("moveOneDamage: %d", moveOneDamage);
+    DebugPrintf("moveTwoDamage: %d", moveTwoDamage);
+
+    if (moveOneDamage.expected > moveTwoDamage.expected)
+        return 1;
+    else if (moveTwoDamage.expected > moveOneDamage.expected)
+        return -1;
+    return 0;
+}
+
 // Checks if one of the moves has side effects or perks, assuming equal dmg or equal no of hits to KO
 s32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32 noOfHitsToKo)
 {

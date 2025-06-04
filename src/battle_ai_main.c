@@ -210,7 +210,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves, u32 battler)
 // Chooses move or action based on each battler
 u32 BattleAI_ChooseMoveOrAction(u32 battler)
 {
-    DebugPrintf("Entering BattleAI_ChooseMoveOrAction");
+    // DebugPrintf("Entering BattleAI_ChooseMoveOrAction");
     // DebugPrintf("Ability: %d", AI_DATA->abilities[gBattlerTarget]);
     Ai_InitPartyStruct();
     u32 ret;
@@ -445,7 +445,7 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
 
 static u32 ChooseMoveOrAction_Singles(u32 battlerAi)
 {
-    DebugPrintf("Entering ChooseMoveOrAction_Singles");
+    // DebugPrintf("Entering ChooseMoveOrAction_Singles");
     s16 currentMoveArray[MAX_MON_MOVES];
     s16 consideredMoveArray[MAX_MON_MOVES];
     u32 numOfBestMoves;
@@ -641,7 +641,7 @@ static inline bool32 ShouldConsiderMoveForBattler(u32 battlerAi, u32 battlerDef,
 
 static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u32 battlerAi, u32 battlerDef)
 {
-    DebugPrintf("Entering BattleAI_DoAIProcessing");
+    // DebugPrintf("Entering BattleAI_DoAIProcessing");
     do
     {
         // DebugPrintf("Beginning Loop");
@@ -3195,6 +3195,16 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
                 }
                 // DebugPrintf("Checking on currId: %d", viableMoveScores[currId]);
                 // DebugPrintf("Checking on i: %d", viableMoveScores[i]);
+
+                switch (AI_WhichMoveDealsMoreDamage(currId, i, battlerAtk, battlerDef))
+                {
+                    case 1:
+                        viableMoveScores[i] -= 1;
+                        break;
+                    case -1:
+                        viableMoveScores[currId] -= 1;
+                        break;
+                }
             }
         }
         // Turns out the current move deals the most dmg compared to the other 3.
@@ -4848,7 +4858,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_AND_RETURN_SCORE(-20); // No point in checking the move further so return early
         else
         {
-            // DebugPrintf("Num hits to ko? %d", GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
+            DebugPrintf("Num hits to ko? %d", GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
             u32 scoreAdjust = AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex);
             ADJUST_SCORE(scoreAdjust);
         }
