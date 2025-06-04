@@ -12173,10 +12173,6 @@ bool32 IsSleepClauseActiveForSide(u32 battlerSide)
 
 bool32 IsSleepClauseEnabled()
 {
-    if (B_SLEEP_CLAUSE)
-        return TRUE;
-    if (FlagGet(B_FLAG_SLEEP_CLAUSE))
-        return TRUE;
     return FALSE;
 }
 
