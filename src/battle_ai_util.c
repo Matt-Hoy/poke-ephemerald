@@ -1023,8 +1023,8 @@ s32 AI_WhichMoveDealsMoreDamage(u32 moveOneIndex, u32 moveTwoIndex, u32 battlerA
 {
     struct SimulatedDamage moveOneDamage = AI_DATA->simulatedDmg[battlerAtk][battlerDef][moveOneIndex];
     struct SimulatedDamage moveTwoDamage = AI_DATA->simulatedDmg[battlerAtk][battlerDef][moveTwoIndex];
-    DebugPrintf("moveOneDamage: %d", moveOneDamage);
-    DebugPrintf("moveTwoDamage: %d", moveTwoDamage);
+    // DebugPrintf("moveOneDamage: %d", moveOneDamage);
+    // DebugPrintf("moveTwoDamage: %d", moveTwoDamage);
 
     if (moveOneDamage.expected > moveTwoDamage.expected)
         return 1;

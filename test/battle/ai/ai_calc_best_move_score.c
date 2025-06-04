@@ -62,7 +62,7 @@ AI_SINGLE_BATTLE_TEST("AI will correctly predict what move the opposing mon goin
         PLAYER(SPECIES_BLAZIKEN) { Speed(15); Moves(MOVE_SKY_UPPERCUT, MOVE_DOUBLE_KICK, MOVE_FLAME_WHEEL, MOVE_CELEBRATE); };
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, MOVE_HOWL, MOVE_AQUA_JET); }
     } WHEN {
-        TURN { MOVE(player, MOVE_DOUBLE_KICK); EXPECT_MOVE(opponent, MOVE_CHIP_AWAY); }
+        TURN { MOVE(player, MOVE_DOUBLE_KICK); EXPECT_MOVE(opponent, MOVE_HOWL); }
         TURN { EXPECT_MOVE(opponent, MOVE_AQUA_JET); MOVE(player, MOVE_DOUBLE_KICK); }
     }
 }
