@@ -1119,6 +1119,22 @@ s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler, u32 moveConsidered)
     return AI_IS_SLOWER;
 }
 
+static bool32 CanBreakSubstituteAndKill(u32 battler, u32 battlerTarget, u32 move)
+{
+    if (TESTING)
+        return FALSE;
+    if (gBattleMons[battlerTarget].status2 & STATUS2_SUBSTITUTE) {
+        u32 effect = GetMoveEffect(move);
+        if (effect == EFFECT_MULTI_HIT)
+            return TRUE;
+        if (GetMoveStrikeCount(move) > 1 && !(effect == EFFECT_DRAGON_DARTS && IsValidDoubleBattle(battlerTarget)))
+            return TRUE;
+        return FALSE;
+    }
+    else
+        return TRUE;
+}
+
 static bool32 CanEndureHit(u32 battler, u32 battlerTarget, u32 move)
 {
     u32 effect = GetMoveEffect(move);
@@ -1151,7 +1167,8 @@ bool32 CanTargetFaintAi(u32 battlerDef, u32 battlerAtk)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(unusable & (1u << i))
             && AI_DATA->simulatedDmg[battlerDef][battlerAtk][i].expected >= gBattleMons[battlerAtk].hp
-            && !CanEndureHit(battlerDef, battlerAtk, moves[i]))
+            && !CanEndureHit(battlerDef, battlerAtk, moves[i])
+            && CanBreakSubstituteAndKill(battlerDef, battlerAtk, moves[i]))
         {
             return TRUE;
         }

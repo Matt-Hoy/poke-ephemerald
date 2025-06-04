@@ -672,22 +672,22 @@ static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u3
 
 static s32 CalculateEngineMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
 {
-    // DebugPrintf("Move Considered: %d", move);
+    DebugPrintf("Move Considered: %d", move);
     CalcBattlerAiMovesData(AI_DATA, battlerAtk, battlerDef, AI_GetWeather());
     s32 finalScore = AI_CheckBadMove(battlerAtk, battlerDef, move, 0);
     if (finalScore < 0)
     {
-        // DebugPrintf("Not checking subsequent functions: %d", finalScore);
+        DebugPrintf("Not checking subsequent functions: %d", finalScore);
         return finalScore;
     }
     finalScore += AI_TryToFaint(battlerAtk, battlerDef, move);
-    // DebugPrintf("finalScore after TrytoFaint: %d", finalScore);
+    DebugPrintf("finalScore after TrytoFaint: %d", finalScore);
     finalScore = AI_CheckViability(battlerAtk, battlerDef, move, finalScore);
-    // DebugPrintf("finalScore after CheckViability: %d", finalScore);
+    DebugPrintf("finalScore after CheckViability: %d", finalScore);
     if (IsValidDoubleBattle(battlerAtk))
         finalScore = AI_DoubleBattle(battlerAtk, battlerDef, move, finalScore);
     
-    // DebugPrintf("finalScore after DoubleBattle: %d", finalScore);
+    DebugPrintf("finalScore after DoubleBattle: %d", finalScore);
     return finalScore;
 }
 
@@ -2627,6 +2627,7 @@ static s32 AI_TryToFaint(u32 battlerAtk, u32 battlerDef, u32 move)
 
     if (CanIndexMoveFaintTarget(battlerAtk, battlerDef, movesetIndex, 0) && GetMoveEffect(move) != EFFECT_EXPLOSION)
     {
+        DebugPrintf("Can knock out!?");
         switch (aiData->abilities[battlerAtk])
         {
             case ABILITY_BEAST_BOOST:
@@ -2647,6 +2648,7 @@ static s32 AI_TryToFaint(u32 battlerAtk, u32 battlerDef, u32 move)
             && GetWhichBattlerFasterOrTies(battlerAtk, battlerDef, TRUE) != AI_IS_FASTER
             && GetBattleMovePriority(battlerAtk, move) > 0)
     {
+        DebugPrintf("I can be knocked out!?");
         ADJUST_SCORE(8);
     }
 
@@ -3258,6 +3260,13 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
     switch (moveEffect)
     {
     case EFFECT_SLEEP:
+        if (GetMoveAccuracy(move) == 100 && (AI_IsFaster(battlerAtk, battlerDef, move) || !CanTargetFaintAi(battlerDef, battlerAtk)))
+            ADJUST_SCORE(5);
+        else if (GetMoveAccuracy(move) == 100)
+            ADJUST_SCORE(GOOD_EFFECT);
+        else
+            IncreaseSleepScore(battlerAtk, battlerDef, move, &score);
+        break;
     case EFFECT_YAWN:
         IncreaseSleepScore(battlerAtk, battlerDef, move, &score);
         break;
