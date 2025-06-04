@@ -3333,20 +3333,17 @@ bool32 AnyPartyMemberStatused(u32 battlerId, bool32 checkSoundproof)
     }
 
     // Check attacker's status
-    if ((GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) == GEN_5
-      || GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) >= GEN_8
-      || AI_DATA->abilities[battlerId] != ABILITY_SOUNDPROOF || !checkSoundproof)
+    if ((AI_DATA->abilities[battlerId] != ABILITY_SOUNDPROOF || !checkSoundproof)
      && GetMonData(&party[battlerOnField1], MON_DATA_STATUS) != STATUS1_NONE)
         return TRUE;
 
+    
     // Check inactive party mons' status
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (i == battlerOnField1 || i == battlerOnField2)
             continue;
-        if (GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) < GEN_5
-         && checkSoundproof
-         && GetMonAbility(&party[i]) == ABILITY_SOUNDPROOF)
+        if (checkSoundproof && GetMonAbility(&party[i]) == ABILITY_SOUNDPROOF)
             continue;
         if (GetMonData(&party[i], MON_DATA_STATUS) != STATUS1_NONE)
             return TRUE;
@@ -3631,7 +3628,9 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
 
     if (CountUsablePartyMons(battlerAtk) == 0
       && (CanTargetFaintAi(battlerDef, battlerAtk) || BattlerWillFaintFromSecondaryDamage(battlerAtk, AI_DATA->abilities[battlerAtk])))
+      {
         return FALSE; // Don't heal if last mon and will faint
+      }
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -3647,7 +3646,6 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
             }
         }
     }
-
     if (!IsDoubleBattle())
     {
         switch (GetMoveEffect(move))
@@ -3657,6 +3655,8 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
                 return TRUE;
             break;
         case EFFECT_HEAL_BELL:
+            if (AI_DATA->abilities[battlerAtk] == ABILITY_SOUNDPROOF)
+                return FALSE;
             if (hasStatus)
                 return TRUE;
         }
@@ -3668,6 +3668,8 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
         case EFFECT_WISH:
             return ShouldRecover(battlerAtk, battlerDef, move, 50); // Switch recovery isn't good idea in doubles
         case EFFECT_HEAL_BELL:
+            if (AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_SOUNDPROOF || AI_DATA->abilities[battlerAtk] == ABILITY_SOUNDPROOF)
+                return FALSE;
             if (hasStatus)
                 return TRUE;
         }

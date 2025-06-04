@@ -226,22 +226,18 @@ AI_DOUBLE_BATTLE_TEST("AI chooses moves that cure self or partner")
 
 AI_SINGLE_BATTLE_TEST("AI chooses moves that cure inactive party members")
 {
-    u32 status, ability, config;
+    u32 status, ability;
 
     PARAMETRIZE { status = STATUS1_TOXIC_POISON; ability = ABILITY_SCRAPPY; }
     PARAMETRIZE { status = STATUS1_NONE;         ability = ABILITY_SCRAPPY; }
-    PARAMETRIZE { status = STATUS1_TOXIC_POISON; ability = ABILITY_SOUNDPROOF; config = GEN_4; }
-    PARAMETRIZE { status = STATUS1_TOXIC_POISON; ability = ABILITY_SOUNDPROOF; config = GEN_5; }
+    PARAMETRIZE { status = STATUS1_TOXIC_POISON; ability = ABILITY_SOUNDPROOF; }
 
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_HEAL_BELL) == EFFECT_HEAL_BELL);
-        WITH_CONFIG(GEN_CONFIG_HEAL_BELL_SOUNDPROOF, config);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_REGIROCK) { Moves(MOVE_BODY_PRESS, MOVE_HEAL_BELL); }
         OPPONENT(SPECIES_EXPLOUD) { Status1(status); Ability(ability); }
     } WHEN {
-        if (status == STATUS1_NONE || (ability == ABILITY_SOUNDPROOF && config <= GEN_4))
+        if (status == STATUS1_NONE || (ability == ABILITY_SOUNDPROOF))
             TURN { EXPECT_MOVE(opponent, MOVE_BODY_PRESS); }
         else
             TURN { EXPECT_MOVE(opponent, MOVE_HEAL_BELL); }
