@@ -41,6 +41,8 @@ static bool32 IsPinchBerryItemEffect(u32 holdEffect);
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;   // Still used in contests
 EWRAM_DATA AiScoreFunc sDynamicAiFunc = NULL;
+EWRAM_DATA bool32 SUB_TEST_CONTROL = NULL;
+
 
 // const rom data
 static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
@@ -2627,7 +2629,7 @@ static s32 AI_TryToFaint(u32 battlerAtk, u32 battlerDef, u32 move)
 
     if (CanIndexMoveFaintTarget(battlerAtk, battlerDef, movesetIndex, 0) && GetMoveEffect(move) != EFFECT_EXPLOSION)
     {
-        DebugPrintf("Can knock out!?");
+        // DebugPrintf("Can knock out!?");
         switch (aiData->abilities[battlerAtk])
         {
             case ABILITY_BEAST_BOOST:
@@ -2648,7 +2650,7 @@ static s32 AI_TryToFaint(u32 battlerAtk, u32 battlerDef, u32 move)
             && GetWhichBattlerFasterOrTies(battlerAtk, battlerDef, TRUE) != AI_IS_FASTER
             && GetBattleMovePriority(battlerAtk, move) > 0)
     {
-        DebugPrintf("I can be knocked out!?");
+        // DebugPrintf("I can be knocked out!?");
         ADJUST_SCORE(8);
     }
 
@@ -3108,18 +3110,22 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
         if (moves[i] != MOVE_NONE && GetMovePower(moves[i]) != 0)
         {
             noOfHits[i] = GetNoOfHitsToKOBattler(battlerAtk, battlerDef, i);
+            // DebugPrintf("noOfHits[i]: %d", noOfHits[i]); // 5
             if (ShouldUseSpreadDamageMove(battlerAtk,moves[i], i, noOfHits[i]))
             {
+                // DebugPrintf("Should I spread?");
                 noOfHits[i] = -1;
                 viableMoveScores[i] = 0;
                 isTwoTurnNotSemiInvulnerableMove[i] = FALSE;
             }
             else if (noOfHits[i] < leastHits && noOfHits[i] != 0)
             {
+                // DebugPrintf("leasthits wizardry");
                 leastHits = noOfHits[i];
             }
             viableMoveScores[i] = AI_SCORE_DEFAULT;
             isTwoTurnNotSemiInvulnerableMove[i] = IsTwoTurnNotSemiInvulnerableMove(battlerAtk, moves[i]);
+            // DebugPrintf("End of block viableMoveScores[i]: %d", viableMoveScores[i]);
         }
         else
         {
@@ -3141,6 +3147,7 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
     // Current move requires the least hits to KO. Compare with other moves.
     if (leastHits == noOfHits[currId])
     {
+        // DebugPrintf("We leasthitting!");
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (i == currId)
@@ -3163,6 +3170,8 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
                     viableMoveScores[currId] -= 2;
                     break;
                 }
+                // DebugPrintf("Checking on currId: %d", viableMoveScores[currId]);
+                // DebugPrintf("Checking on i: %d", viableMoveScores[i]);
                 switch (AI_WhichMoveBetter(moves[currId], moves[i], battlerAtk, battlerDef, noOfHits[currId]))
                 {
                 case 1:
@@ -3172,9 +3181,12 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
                     viableMoveScores[currId] -= 1;
                     break;
                 }
+                // DebugPrintf("Checking on currId: %d", viableMoveScores[currId]);
+                // DebugPrintf("Checking on i: %d", viableMoveScores[i]);
             }
         }
         // Turns out the current move deals the most dmg compared to the other 3.
+        // DebugPrintf("Multiple Best Moves?: %d", multipleBestMoves);
         if (!multipleBestMoves)
             ADJUST_SCORE(3);
         else
@@ -3182,10 +3194,12 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
             bestViableMoveScore = 0;
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
+                DebugPrintf("viableMoveScore[i]: %d", viableMoveScores[i]);
                 if (viableMoveScores[i] > bestViableMoveScore)
                     bestViableMoveScore = viableMoveScores[i];
             }
             // Unless a better move was found increase score of current move
+            DebugPrintf("viableMoveScores[currId]: %d", viableMoveScores[currId]);
             if (viableMoveScores[currId] == bestViableMoveScore)
                 ADJUST_SCORE(3);
         }
@@ -4803,14 +4817,15 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_AND_RETURN_SCORE(-20); // No point in checking the move further so return early
         else
         {
-            ADJUST_SCORE(AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
-            // DebugPrintf("Adjusted move power in CheckViability: %d", score);
+            u32 scoreAdjust = AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex);
+            ADJUST_SCORE(scoreAdjust);
         }
     }
     // DebugPrintf("Score before effect scores: %d", score);
 
     u32 effectScore = AI_CalcMoveEffectScore(battlerAtk, battlerDef, move);
     ADJUST_SCORE(effectScore);
+    DebugPrintf("Additional Effect Score: %d", score);
     u32 holdScore = AI_CalcHoldEffectMoveScore(battlerAtk, battlerDef, move);
     ADJUST_SCORE(holdScore);
 

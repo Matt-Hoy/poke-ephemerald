@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 #include "battle_ai_util.h"
+#include "battle_ai_main.h"
 
 AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it knows it faints to target: AI faster")
 {
@@ -54,9 +55,10 @@ AI_SINGLE_BATTLE_TEST("AI will increase speed if it is slower")
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI will correctly predict what move the opposing mon going to use and prioritize ")
+AI_SINGLE_BATTLE_TEST("AI will correctly predict what move the opposing mon going to use and prioritize")
 {
     GIVEN {
+        SUB_TEST_CONTROL = FALSE;
         PLAYER(SPECIES_BLAZIKEN) { Speed(15); Moves(MOVE_SKY_UPPERCUT, MOVE_DOUBLE_KICK, MOVE_FLAME_WHEEL, MOVE_CELEBRATE); };
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, MOVE_HOWL, MOVE_AQUA_JET); }
     } WHEN {

@@ -219,7 +219,6 @@ AI_SINGLE_BATTLE_TEST("AI prefers a weaker move over a one with a downside effec
 AI_SINGLE_BATTLE_TEST("AI prefers moves with the best possible score, chosen randomly if tied")
 {
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(5); };
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_THUNDERBOLT, MOVE_SLUDGE_BOMB, MOVE_TAKE_DOWN); }
@@ -527,13 +526,6 @@ AI_SINGLE_BATTLE_TEST("AI will choose Scratch over Power-up Punch with Contrary"
     PARAMETRIZE {ability = ABILITY_SUCTION_CUPS; }
     PARAMETRIZE {ability = ABILITY_CONTRARY; }
     GIVEN {
-        ASSUME(GetMovePower(MOVE_SCRATCH) == 40);
-        ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
-        ASSUME(GetMovePower(MOVE_POWER_UP_PUNCH) == 40);
-        ASSUME(GetMoveType(MOVE_POWER_UP_PUNCH) == TYPE_FIGHTING);
-        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TYPE_WATER);
-        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[1] == TYPE_WATER);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_SQUIRTLE) { };
         OPPONENT(SPECIES_MALAMAR) { Ability(ability); Moves(MOVE_SCRATCH, MOVE_POWER_UP_PUNCH); }
     } WHEN {
@@ -543,6 +535,16 @@ AI_SINGLE_BATTLE_TEST("AI will choose Scratch over Power-up Punch with Contrary"
             else
                 EXPECT_MOVE(opponent, MOVE_SCRATCH);
         }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI will choose randomly between Scratch and Pound")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { };
+        OPPONENT(SPECIES_MALAMAR) { Moves(MOVE_POUND, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { EXPECT_MOVES(opponent, MOVE_POUND, MOVE_SCRATCH); }
     }
 }
 

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
+#include "battle_ai_main.h"
 
 ASSUMPTIONS
 {
@@ -89,6 +90,7 @@ AI_SINGLE_BATTLE_TEST("AI won't use Focus Punch if it predicts a damaging move")
 AI_SINGLE_BATTLE_TEST("AI will Incapacitate -> Substitute -> Focus Punch if able and faster or not in imminent danger")
 {
     GIVEN {
+        SUB_TEST_CONTROL = TRUE;
         PLAYER(SPECIES_MAGNEZONE) { Moves(MOVE_THUNDER_WAVE, MOVE_FLASH_CANNON, MOVE_DISCHARGE, MOVE_TRI_ATTACK); }
         OPPONENT(SPECIES_BRELOOM) { Moves(MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_SUBSTITUTE, MOVE_AQUA_JET); }
     } WHEN {
