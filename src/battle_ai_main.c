@@ -2655,9 +2655,17 @@ static s32 AI_TryToFaint(u32 battlerAtk, u32 battlerDef, u32 move)
         if (atkPriority > 0)
             ADJUST_SCORE(8);
         else if (AI_IsFaster(battlerAtk, battlerDef, move))
-            ADJUST_SCORE(6);
+        {
+            if (move == MOVE_PURSUIT)
+                ADJUST_SCORE(9);
+            else
+                ADJUST_SCORE(6);
+        }
         else
-            ADJUST_SCORE(4);
+            if (!CanTargetFaintAi(battlerDef, battlerAtk) && move == MOVE_PURSUIT)
+                ADJUST_SCORE(6);
+            else
+                ADJUST_SCORE(4);
     }
     else if (CanTargetFaintAi(battlerDef, battlerAtk)
             && GetWhichBattlerFasterOrTies(battlerAtk, battlerDef, TRUE) != AI_IS_FASTER
@@ -4858,15 +4866,15 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_AND_RETURN_SCORE(-20); // No point in checking the move further so return early
         else
         {
-            DebugPrintf("Num hits to ko? %d", GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
+            // DebugPrintf("Num hits to ko? %d", GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
             u32 scoreAdjust = AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex);
             ADJUST_SCORE(scoreAdjust);
         }
     }
-    DebugPrintf("Score before effect scores: %d", score);
+    // DebugPrintf("Score before effect scores: %d", score);
 
     u32 effectScore = AI_CalcMoveEffectScore(battlerAtk, battlerDef, move);
-    DebugPrintf("effectScore: %d", effectScore);
+    // DebugPrintf("effectScore: %d", effectScore);
     ADJUST_SCORE(effectScore);
     // DebugPrintf("Additional Effect Score: %d", score);
     u32 holdScore = AI_CalcHoldEffectMoveScore(battlerAtk, battlerDef, move);
