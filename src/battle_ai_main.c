@@ -4780,9 +4780,9 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
                         if (IsSoundMove(GetBestDmgMoveFromBattler(battlerDef, battlerAtk)))
                         {
                             if (AI_IsFaster(battlerAtk, battlerDef, move))
-                                ADJUST_SCORE(GOOD_EFFECT);
+                                ADJUST_SCORE(BEST_EFFECT);
                             else
-                                ADJUST_SCORE(DECENT_EFFECT);
+                                ADJUST_SCORE(GOOD_EFFECT);
                         }
                         // DebugPrintf("CurrentScore1: %d", score);
                         break;
@@ -4866,17 +4866,17 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_AND_RETURN_SCORE(-20); // No point in checking the move further so return early
         else
         {
-            // DebugPrintf("Num hits to ko? %d", GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
+            DebugPrintf("Num hits to ko? %d", GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
             u32 scoreAdjust = AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex);
             ADJUST_SCORE(scoreAdjust);
         }
     }
-    // DebugPrintf("Score before effect scores: %d", score);
+    DebugPrintf("Score before effect scores: %d", score);
 
     u32 effectScore = AI_CalcMoveEffectScore(battlerAtk, battlerDef, move);
-    // DebugPrintf("effectScore: %d", effectScore);
+    DebugPrintf("effectScore: %d", effectScore);
     ADJUST_SCORE(effectScore);
-    // DebugPrintf("Additional Effect Score: %d", score);
+    DebugPrintf("Additional Effect Score: %d", score);
     u32 holdScore = AI_CalcHoldEffectMoveScore(battlerAtk, battlerDef, move);
     ADJUST_SCORE(holdScore);
 
