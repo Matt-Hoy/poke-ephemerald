@@ -210,6 +210,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves, u32 battler)
 // Chooses move or action based on each battler
 u32 BattleAI_ChooseMoveOrAction(u32 battler)
 {
+    DebugPrintf("Entering BattleAI_ChooseMoveOrAction");
     // DebugPrintf("Ability: %d", AI_DATA->abilities[gBattlerTarget]);
     Ai_InitPartyStruct();
     u32 ret;
@@ -219,12 +220,15 @@ u32 BattleAI_ChooseMoveOrAction(u32 battler)
     else
         ret = ChooseMoveOrAction_Doubles(battler);
 
+    // DebugPrintf("Checkpoint5");
     // Clear protect structures, some flags may be set during AI calcs
     // e.g. pranksterElevated from GetBattleMovePriority
     memset(&gProtectStructs, 0, MAX_BATTLERS_COUNT * sizeof(struct ProtectStruct));
     #if TESTING
     TestRunner_Battle_CheckAiMoveScores(battler);
     #endif // TESTING
+
+    // DebugPrintf("Checkpoint6");
     return ret;
 }
 
@@ -441,7 +445,7 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
 
 static u32 ChooseMoveOrAction_Singles(u32 battlerAi)
 {
-    // DebugPrintf("Entering ChooseMoveOrAction_Singles");
+    DebugPrintf("Entering ChooseMoveOrAction_Singles");
     s16 currentMoveArray[MAX_MON_MOVES];
     s16 consideredMoveArray[MAX_MON_MOVES];
     u32 numOfBestMoves;
@@ -467,6 +471,7 @@ static u32 ChooseMoveOrAction_Singles(u32 battlerAi)
 
     BattleAI_DoAIProcessing(AI_THINKING_STRUCT, battlerAi, gBattlerTarget);
 
+    // DebugPrintf("Checkpoint1");
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         gBattleStruct->aiFinalScore[battlerAi][gBattlerTarget][i] = AI_THINKING_STRUCT->score[i];
@@ -480,11 +485,13 @@ static u32 ChooseMoveOrAction_Singles(u32 battlerAi)
     if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
         return AI_CHOICE_WATCH;
 
+    // DebugPrintf("Checkpoint2");
     numOfBestMoves = 1;
     // DebugPrintf("INITIALIZER Score: %d", AI_THINKING_STRUCT->score[0]);
     currentMoveArray[0] = AI_THINKING_STRUCT->score[0];
     // DebugPrintf("ASSIGNED sc%d", currentMoveArray[0]);
 
+    // DebugPrintf("Checkpoint3");
     consideredMoveArray[0] = 0;
 
     // find and choose the highest scoring move. In the case of a tie, choose randomly.
@@ -508,6 +515,8 @@ static u32 ChooseMoveOrAction_Singles(u32 battlerAi)
         // DebugPrintf("Move: %d", gBattleMons[battlerAi].moves[i]);
         // DebugPrintf("numOfBestMoves: %d", numOfBestMoves);
     }
+    
+    // DebugPrintf("Checkpoint4");
     return consideredMoveArray[Random() % numOfBestMoves];
 }
 
@@ -632,7 +641,7 @@ static inline bool32 ShouldConsiderMoveForBattler(u32 battlerAi, u32 battlerDef,
 
 static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u32 battlerAi, u32 battlerDef)
 {
-    // DebugPrintf("Entering BattleAI_DoAIProcessing");
+    DebugPrintf("Entering BattleAI_DoAIProcessing");
     do
     {
         // DebugPrintf("Beginning Loop");
@@ -649,6 +658,7 @@ static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u3
             // DebugPrintf("Move Considered: %d", aiThink->moveConsidered);
         }
 
+        // DebugPrintf("Considering?");
         if (aiThink->moveConsidered != MOVE_NONE
           && aiThink->score[aiThink->movesetIndex] > 0
           && ShouldConsiderMoveForBattler(battlerAi, battlerDef, aiThink->moveConsidered))
@@ -666,8 +676,10 @@ static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u3
         else
         {
             aiThink->score[aiThink->movesetIndex] = 0;
+            // DebugPrintf("Zeroing?");
         }
         aiThink->movesetIndex++;
+        // DebugPrintf("Looping?");
     } while (aiThink->movesetIndex < MAX_MON_MOVES && !(aiThink->aiAction & AI_ACTION_DO_NOT_ATTACK));
     
 }
@@ -3110,7 +3122,7 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
         if (moves[i] != MOVE_NONE && GetMovePower(moves[i]) != 0)
         {
             noOfHits[i] = GetNoOfHitsToKOBattler(battlerAtk, battlerDef, i);
-            // DebugPrintf("noOfHits[i]: %d", noOfHits[i]); // 5
+            // DebugPrintf("noOfHits[i]: %d", noOfHits[i]);
             if (ShouldUseSpreadDamageMove(battlerAtk,moves[i], i, noOfHits[i]))
             {
                 // DebugPrintf("Should I spread?");
@@ -3147,7 +3159,7 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
     // Current move requires the least hits to KO. Compare with other moves.
     if (leastHits == noOfHits[currId])
     {
-        // DebugPrintf("We leasthitting!");
+        // DebugPrintf("We leasthitting! %d", viableMoveScores[currId]);
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (i == currId)
@@ -3194,12 +3206,12 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
             bestViableMoveScore = 0;
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                DebugPrintf("viableMoveScore[i]: %d", viableMoveScores[i]);
+                // DebugPrintf("viableMoveScore[i]: %d", viableMoveScores[i]);
                 if (viableMoveScores[i] > bestViableMoveScore)
                     bestViableMoveScore = viableMoveScores[i];
             }
             // Unless a better move was found increase score of current move
-            DebugPrintf("viableMoveScores[currId]: %d", viableMoveScores[currId]);
+            // DebugPrintf("viableMoveScores[currId]: %d", viableMoveScores[currId]);
             if (viableMoveScores[currId] == bestViableMoveScore)
                 ADJUST_SCORE(3);
         }
@@ -3250,6 +3262,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
     u32 predictedType = GetMoveType(predictedMove);
     u32 predictedMoveSlot = GetMoveSlot(GetMovesArray(battlerDef), predictedMove);
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
+    u32 abilityDef = AI_DATA->abilities[battlerDef];
     u32 i;
 
     // The AI should understand that while Dynamaxed, status moves function like Protect.
@@ -3313,6 +3326,8 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
     case EFFECT_ATTACK_UP:
     case EFFECT_ATTACK_UP_USER_ALLY:
         ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_ATK));
+        if (IsValidDoubleBattle(battlerAtk))
+            ADJUST_SCORE(IncreaseStatUpScore(BATTLE_PARTNER(battlerAtk), battlerDef, STAT_CHANGE_ATK));
         break;
     case EFFECT_ATTACK_UP_2:
         ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_ATK_2));
@@ -4513,6 +4528,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
         ADJUST_SCORE(AI_ShouldCopyStatChanges(battlerAtk, battlerDef));
         break;
     } // move effect checks
+    // DebugPrintf("Before additional effects score: %d", score);
 
     u32 additionalEffectCount = GetMoveAdditionalEffectCount(move);
     // DebugPrintf("additionalEffectCount: %d", additionalEffectCount);
@@ -4523,7 +4539,6 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
         // // Only consider effects with a guaranteed chance to happen
         // if (!MoveEffectIsGuaranteed(battlerAtk, aiData->abilities[battlerAtk], additionalEffect))
         //     continue;
-
         if (MoveEffectIsGuaranteed(battlerAtk, aiData->abilities[battlerAtk], additionalEffect))
         {
             if (additionalEffect->self)
@@ -4608,6 +4623,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
             }
             else // consider move effects that hinder the target
             {
+                // DebugPrintf("ELSE Current Score: %d", score);
                 switch (additionalEffect->moveEffect)
                 {
                     case MOVE_EFFECT_FLINCH:
@@ -4760,11 +4776,18 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
                         if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_WATER) || IS_BATTLER_OF_TYPE(battlerDef, TYPE_STEEL))
                             ADJUST_SCORE(DECENT_EFFECT);
                         break;
+                    case MOVE_EFFECT_DIRE_CLAW:
+                        if (AI_CanPoison(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE) 
+                        || AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE) 
+                        || AI_CanPutToSleep(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
+                            ADJUST_SCORE(2);
+                        break;
                 }
             }
         }
         else
         {
+            // DebugPrintf("Non-Guaranteed additional score: %d", score);
             if (additionalEffect->self && IsSelfStatLoweringEffect(additionalEffect->moveEffect))
                 ADJUST_SCORE(-1);
             else
@@ -4798,9 +4821,16 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
                     case MOVE_EFFECT_POISON:
                         ADJUST_SCORE(1);
                         break;
+                    case MOVE_EFFECT_DIRE_CLAW:
+                        if (AI_CanPoison(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE) 
+                        || AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE) 
+                        || AI_CanPutToSleep(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
+                            ADJUST_SCORE(1);
+                        break;            
                 }
             }
         }
+        // DebugPrintf("What the fuck score?: %d", score);
 
         // Consider move effects that target self
     }
@@ -4811,6 +4841,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
 // AI_FLAG_CHECK_VIABILITY - Chooses best possible move to hit player
 static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
+    // DebugPrintf("Score at the start of CheckViability: %d", score);
     if (GetMovePower(move) != 0)
     {
         if (GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex) == 0)
@@ -4825,8 +4856,9 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     // DebugPrintf("Score before effect scores: %d", score);
 
     u32 effectScore = AI_CalcMoveEffectScore(battlerAtk, battlerDef, move);
+    // DebugPrintf("effectScore: %d", effectScore);
     ADJUST_SCORE(effectScore);
-    DebugPrintf("Additional Effect Score: %d", score);
+    // DebugPrintf("Additional Effect Score: %d", score);
     u32 holdScore = AI_CalcHoldEffectMoveScore(battlerAtk, battlerDef, move);
     ADJUST_SCORE(holdScore);
 

@@ -171,24 +171,31 @@ AI_SINGLE_BATTLE_TEST("AI can choose Counter or Mirror Coat if the predicted mov
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% chance to trigger")
+AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% chance to trigger (PART ONE)")
 {
-    u16 ability;
-
-    PARAMETRIZE { ability = ABILITY_NONE; }
-    PARAMETRIZE { ability = ABILITY_SERENE_GRACE; }
-
     GIVEN {
-        ASSUME(MoveHasAdditionalEffectWithChance(MOVE_SHADOW_BALL, MOVE_EFFECT_SP_DEF_MINUS_1, 20));
-        ASSUME(MoveHasAdditionalEffectWithChance(MOVE_OCTAZOOKA, MOVE_EFFECT_ACC_MINUS_1, 50));
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_REGICE);
-        OPPONENT(SPECIES_REGIROCK) { Ability(ability); Moves(MOVE_SHADOW_BALL, MOVE_OCTAZOOKA); }
+        PLAYER(SPECIES_CRYOGONAL);
+        OPPONENT(SPECIES_REGIROCK) { Ability(ABILITY_NONE); Moves(MOVE_CRUNCH, MOVE_DIRE_CLAW); }
     } WHEN {
-        if (ability == ABILITY_NONE)
-            TURN { EXPECT_MOVE(opponent, MOVE_SHADOW_BALL); }
-        else
-            TURN { EXPECT_MOVES(opponent, MOVE_OCTAZOOKA); }
+        TURN 
+        { 
+            EXPECT_MOVES(opponent, MOVE_CRUNCH, MOVE_DIRE_CLAW);
+            SCORE_EQ(opponent, MOVE_CRUNCH, MOVE_DIRE_CLAW);
+        }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% chance to trigger (PART TWO)")
+{
+    GIVEN {
+        PLAYER(SPECIES_CRYOGONAL);
+        OPPONENT(SPECIES_REGIROCK) { Ability(ABILITY_SERENE_GRACE); Moves(MOVE_CRUNCH, MOVE_DIRE_CLAW); }
+    } WHEN {
+        TURN 
+        { 
+            EXPECT_MOVE(opponent, MOVE_DIRE_CLAW); 
+            SCORE_GT(opponent, MOVE_DIRE_CLAW, MOVE_CRUNCH);
+        }
     }
 }
 
