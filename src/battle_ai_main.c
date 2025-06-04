@@ -686,6 +686,7 @@ static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u3
 
 static s32 CalculateEngineMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
 {
+    DebugPrintf("=================================");
     DebugPrintf("Move Considered: %d", move);
     CalcBattlerAiMovesData(AI_DATA, battlerAtk, battlerDef, AI_GetWeather());
     s32 finalScore = AI_CheckBadMove(battlerAtk, battlerDef, move, 0);
@@ -4641,9 +4642,8 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
                         break;
                     case MOVE_EFFECT_SPD_MINUS_1:
                     case MOVE_EFFECT_SPD_MINUS_2:
-                        if (!ShouldLowerSpeed(battlerAtk, battlerDef, aiData->abilities[battlerDef]))
-                            ADJUST_SCORE(1);
-                            break;
+                        if (ShouldLowerSpeed(battlerAtk, battlerDef, aiData->abilities[battlerDef]))
+                            ADJUST_SCORE(DECENT_EFFECT);
                     case MOVE_EFFECT_ATK_MINUS_1:
                     case MOVE_EFFECT_DEF_MINUS_1:
                     case MOVE_EFFECT_SP_ATK_MINUS_1:
@@ -4858,15 +4858,15 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_AND_RETURN_SCORE(-20); // No point in checking the move further so return early
         else
         {
-            // DebugPrintf("Num hits to ko? %d", GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
+            DebugPrintf("Num hits to ko? %d", GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
             u32 scoreAdjust = AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex);
             ADJUST_SCORE(scoreAdjust);
         }
     }
-    // DebugPrintf("Score before effect scores: %d", score);
+    DebugPrintf("Score before effect scores: %d", score);
 
     u32 effectScore = AI_CalcMoveEffectScore(battlerAtk, battlerDef, move);
-    // DebugPrintf("effectScore: %d", effectScore);
+    DebugPrintf("effectScore: %d", effectScore);
     ADJUST_SCORE(effectScore);
     // DebugPrintf("Additional Effect Score: %d", score);
     u32 holdScore = AI_CalcHoldEffectMoveScore(battlerAtk, battlerDef, move);
