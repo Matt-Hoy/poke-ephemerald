@@ -2903,10 +2903,6 @@ u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field)
 
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
 {
-    if (field == MON_DATA_MOVE1 || field == MON_DATA_MOVE2 || field == MON_DATA_MOVE3 || field == MON_DATA_MOVE4)
-    {
-        // DebugPrintf("Settings Moves!: %d", field);
-    }
     const u8 *data = dataArg;
 
     switch (field)
