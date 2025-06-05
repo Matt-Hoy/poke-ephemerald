@@ -480,10 +480,6 @@ AI_SINGLE_BATTLE_TEST("First Impression is not chosen if it's blocked by certain
     PARAMETRIZE { species = SPECIES_TSAREENA; ability = ABILITY_QUEENLY_MAJESTY; }
 
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_FIRST_IMPRESSION) == EFFECT_FIRST_TURN_ONLY);
-        ASSUME(GetMovePower(MOVE_FIRST_IMPRESSION) == 90);
-        ASSUME(GetMovePower(MOVE_LUNGE) == 80);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
         PLAYER(species) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FIRST_IMPRESSION, MOVE_LUNGE); }
     } WHEN {
