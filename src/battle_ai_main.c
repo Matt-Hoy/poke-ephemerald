@@ -393,12 +393,6 @@ static void SetBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u3
         CalcBattlerAiMovesData(aiData, battlerAtk, battlerDef, weather);
         RestoreBattlerData(battlerDef);
     }
-    // u8 i;
-    // for (i = 0; i < ARRAY_COUNT(aiData->simulatedDmg[battlerAtk][battlerDef]); i++)
-    // {
-    //     DebugPrintf("Move: %d", GetMovesArray(battlerAtk)[i]);
-    //     DebugPrintf("Simulated Damage: %d", aiData->simulatedDmg[battlerAtk][battlerDef][i]);
-    // }
     RestoreBattlerData(battlerAtk);
 }
 
