@@ -393,12 +393,6 @@ static void SetBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u3
         CalcBattlerAiMovesData(aiData, battlerAtk, battlerDef, weather);
         RestoreBattlerData(battlerDef);
     }
-    // u8 i;
-    // for (i = 0; i < ARRAY_COUNT(aiData->simulatedDmg[battlerAtk][battlerDef]); i++)
-    // {
-    //     DebugPrintf("Move: %d", GetMovesArray(battlerAtk)[i]);
-    //     DebugPrintf("Simulated Damage: %d", aiData->simulatedDmg[battlerAtk][battlerDef][i]);
-    // }
     RestoreBattlerData(battlerAtk);
 }
 
@@ -3210,6 +3204,7 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
                 // DebugPrintf("Checking on currId: %d", viableMoveScores[currId]);
                 // DebugPrintf("Checking on i: %d", viableMoveScores[i]);
 
+
                 switch (AI_WhichMoveDealsMoreDamage(currId, i, battlerAtk, battlerDef))
                 {
                     case 1:
@@ -4873,6 +4868,16 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         {
             // DebugPrintf("Num hits to ko? %d", GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
             u32 scoreAdjust = AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex);
+            u32 moveTotalAccuracy = GetTotalAccuracy(battlerAtk, battlerDef, move, AI_DATA->abilities[battlerAtk], AI_DATA->abilities[battlerDef], AI_DATA->holdEffects[battlerAtk], AI_DATA->holdEffects[battlerDef]);
+            // DebugPrintf("MoveTotalAccuracy: %d", moveTotalAccuracy);
+            if (moveTotalAccuracy <= 50 && moveTotalAccuracy > 0)
+                scoreAdjust -= 3;
+            else if (moveTotalAccuracy <=70 && moveTotalAccuracy > 0)
+                scoreAdjust -= 2;
+            else if (moveTotalAccuracy < 100 && moveTotalAccuracy > 0)
+                scoreAdjust -= 1;
+            
+            // DebugPrintf("scoreAdjust: %d", scoreAdjust);
             ADJUST_SCORE(scoreAdjust);
         }
     }

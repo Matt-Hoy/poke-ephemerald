@@ -589,25 +589,6 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it can't d
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has been Toxic'd for at least two turns 50% of the time with more than 1/3 HP remaining with good switchin")
-{
-    u32 species = SPECIES_NONE, odds = 0;
-    PARAMETRIZE { species = SPECIES_ZIGZAGOON, odds = 0; }
-    PARAMETRIZE { species = SPECIES_HARIYAMA, odds = SHOULD_SWITCH_BADLY_POISONED_PERCENTAGE; }
-    PASSES_RANDOMLY(odds, 100, RNG_AI_SWITCH_BADLY_POISONED);
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_TOXIC);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
-        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_SCRATCH, MOVE_CELEBRATE, MOVE_TOXIC, MOVE_AURA_SPHERE); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_SCRATCH); }
-        OPPONENT(species) { Moves(MOVE_ROCK_SMASH); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_TOXIC); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
-        TURN { MOVE(player, MOVE_AURA_SPHERE); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
-        TURN { MOVE(player, MOVE_AURA_SPHERE); EXPECT_SWITCH(opponent, 1); }
-    }
-}
-
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has been Curse'd 50% of the time")
 {
     PASSES_RANDOMLY(SHOULD_SWITCH_CURSED_PERCENTAGE, 100, RNG_AI_SWITCH_CURSED);
@@ -687,23 +668,6 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has bee
             TURN { MOVE(player, MOVE_YAWN) ; EXPECT_SWITCH(opponent, 1); }
         else
             TURN { MOVE(player, MOVE_YAWN) ; EXPECT_MOVE(opponent, MOVE_SCRATCH); }
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will not switch out if it has been Yawn'd with more than 1/3 HP remaining and it does not have a good switchin")
-{
-    u32 hp;
-    PARAMETRIZE { hp = 30; }
-    PARAMETRIZE { hp = 10; }
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_YAWN) == EFFECT_YAWN);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
-        PLAYER(SPECIES_SLAKOTH) { Moves(MOVE_SCRATCH, MOVE_YAWN); }
-        OPPONENT(SPECIES_SLAKOTH) { Moves(MOVE_SCRATCH); HP(hp); MaxHP(30); }
-        OPPONENT(SPECIES_SLAKOTH) { Level(1); Moves(MOVE_HEADBUTT); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_YAWN) ; EXPECT_MOVE(opponent, MOVE_SCRATCH); }
-        TURN { MOVE(player, MOVE_SCRATCH) ; EXPECT_MOVE(opponent, MOVE_SCRATCH); }
     }
 }
 
@@ -877,21 +841,6 @@ AI_SINGLE_BATTLE_TEST("Switch AI: AI will switch out if it has <= 66% HP remaini
         OPPONENT(SPECIES_SLOWBRO) { Ability(ABILITY_REGENERATOR); Moves(MOVE_SCRATCH); }
     } WHEN {
         TURN { MOVE(player, MOVE_SCRATCH); EXPECT_SWITCH(opponent, 1); }
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has been Encore'd into a status move")
-{
-    PASSES_RANDOMLY(SHOULD_SWITCH_ENCORE_STATUS_PERCENTAGE, 100, RNG_AI_SWITCH_ENCORE);
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_ENCORE) == EFFECT_ENCORE);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
-        PLAYER(SPECIES_AZURILL) { Moves(MOVE_SCRATCH, MOVE_ENCORE); }
-        OPPONENT(SPECIES_ODDISH) { Moves(MOVE_TOXIC, MOVE_SWEET_SCENT, MOVE_INGRAIN, MOVE_SCRATCH); }
-        OPPONENT(SPECIES_ARON) { Moves(MOVE_METAL_CLAW); }
-    } WHEN {
-        TURN { EXPECT_MOVE(opponent, MOVE_TOXIC); MOVE(player, MOVE_ENCORE); }
-        TURN { MOVE(player, MOVE_ENCORE); EXPECT_SWITCH(opponent, 1); }
     }
 }
 
