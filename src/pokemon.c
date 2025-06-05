@@ -2954,6 +2954,7 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
     case MON_DATA_SPECIES_OR_EGG:
         break;
     default:
+        // DebugPrintf("DEFAULTING");
         SetBoxMonData(&mon->box, field, data);
         break;
     }
@@ -3031,9 +3032,11 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_MOVE1:
             SET16(substruct1->move1);
+            // DebugPrintf("MOVE 1: %d", substruct1->move1);
             break;
         case MON_DATA_MOVE2:
             SET16(substruct1->move2);
+            // DebugPrintf("MOVE 2: %d", substruct1->move2);
             break;
         case MON_DATA_MOVE3:
             SET16(substruct1->move3);

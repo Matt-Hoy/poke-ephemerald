@@ -4174,6 +4174,7 @@ static void HandleTurnActionSelectionState(void)
         switch (gBattleCommunication[battler])
         {
         case STATE_TURN_START_RECORD: // Recorded battle related action on start of every turn.
+            // DebugPrintf("STATE_TURN_START_RECORD");
             RecordedBattle_CopyBattlerMoves(battler);
             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
             enum SwitchType switchType = (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_RISKY) ? SWITCH_AFTER_KO : SWITCH_MID_BATTLE; // Risky AI switches aggressively even mid battle
@@ -4190,18 +4191,23 @@ static void HandleTurnActionSelectionState(void)
 
                 // Do scoring
                 gBattleStruct->aiMoveOrAction[battler] = BattleAI_ChooseMoveOrAction(battler);
+                // DebugPrintf("Checkpoint7");
                 AI_DATA->aiCalcInProgress = FALSE;
             }
             // fallthrough
         case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
+            // DebugPrintf("STATE_BEFORE_ACTION_CHOSEN");
             gBattleStruct->monToSwitchIntoId[battler] = PARTY_SIZE;
+            // DebugPrintf("Checkpoint8");
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
                 || (position & BIT_FLANK) == B_FLANK_LEFT
                 || gBattleStruct->battlerState[GetBattlerAtPosition(BATTLE_PARTNER(position))].absentBattlerFlags
                 || gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(position))] == STATE_WAIT_ACTION_CONFIRMED)
             {
+                // DebugPrintf("Checkpoint9");
                 if (gBattleStruct->battlerState[battler].absentBattlerFlags || gBattleStruct->battlerState[battler].commandingDondozo)
                 {
+                    // DebugPrintf("Checkpoint10");
                     gChosenActionByBattler[battler] = B_ACTION_NOTHING_FAINTED;
                     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
                         gBattleCommunication[battler] = STATE_WAIT_ACTION_CONFIRMED;
@@ -4210,6 +4216,7 @@ static void HandleTurnActionSelectionState(void)
                 }
                 else
                 {
+                    // DebugPrintf("Checkpoint11");
                     if (gBattleMons[battler].status2 & STATUS2_MULTIPLETURNS
                         || gBattleMons[battler].status2 & STATUS2_RECHARGE)
                     {
@@ -4234,8 +4241,10 @@ static void HandleTurnActionSelectionState(void)
                     }
                 }
             }
+            // DebugPrintf("Checkpoint12");
             break;
         case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.
+            // DebugPrintf("STATE_WAIT_ACTION_CHOSEN");
             if (!(gBattleControllerExecFlags & (((1u << battler)) | (0xF << 28) | ((1u << battler) << 4) | ((1u << battler) << 8) | ((1u << battler) << 12))))
             {
                 RecordedBattle_SetBattlerAction(battler, gBattleResources->bufferB[battler][1]);
@@ -4432,6 +4441,7 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CASE_CHOSEN:
+            // DebugPrintf("STATE_WAIT_ACTION_CASE_CHOSEN");
             if (!(gBattleControllerExecFlags & (((1u << battler)) | (0xF << 28) | ((1u << battler) << 4) | ((1u << battler) << 8) | ((1u << battler) << 12))))
             {
                 switch (gChosenActionByBattler[battler])
@@ -4562,6 +4572,7 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CONFIRMED_STANDBY:
+            // DebugPrintf("STATE_WAIT_ACTION_CONFIRMED_STANDBY");
             if (!(gBattleControllerExecFlags & ((1u << battler)
                                                 | (0xF << 28)
                                                 | (1u << (battler + 4))
@@ -4588,12 +4599,14 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CONFIRMED:
+            // DebugPrintf("STATE_WAIT_ACTION_CONFIRMED");
             if (!(gBattleControllerExecFlags & ((1u << battler) | (0xF << 28) | (1u << (battler + 4)) | (1u << (battler + 8)) | (1u << (battler + 12)))))
             {
                 gBattleCommunication[ACTIONS_CONFIRMED_COUNT]++;
             }
             break;
         case STATE_SELECTION_SCRIPT:
+            // DebugPrintf("STATE_SELECTION_SCRIPT");
             if (gBattleStruct->selectionScriptFinished[battler])
             {
                 gBattleCommunication[battler] = gBattleStruct->stateIdAfterSelScript[battler];
@@ -4610,12 +4623,14 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_SET_BEFORE_ACTION:
+            // DebugPrintf("STATE_WAIT_SET_BEFORE_ACTION");
                 if (!(gBattleControllerExecFlags & ((1u << battler) | (0xF << 28) | (1u << (battler + 4)) | (1u << (battler + 8)) | (1u << (battler + 12)))))
             {
                 gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
             }
             break;
         case STATE_SELECTION_SCRIPT_MAY_RUN:
+            // DebugPrintf("STATE_SELECTION_SCRIPT_MAY_RUN");
             if (gBattleStruct->selectionScriptFinished[battler])
             {
                 if (gBattleResources->bufferB[battler][1] == B_ACTION_NOTHING_FAINTED)

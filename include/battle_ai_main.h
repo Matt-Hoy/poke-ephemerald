@@ -1,6 +1,7 @@
 #ifndef GUARD_BATTLE_AI_MAIN_H
 #define GUARD_BATTLE_AI_MAIN_H
 
+extern bool32 SUB_TEST_CONTROL;
 
 typedef s32 (*AiScoreFunc)(u32, u32, u32, s32);
 

@@ -84,11 +84,7 @@ bool32 BattlerHasAi(u32 battlerId)
 
 bool32 IsAiBattlerAware(u32 battlerId)
 {
-    if (AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT] & AI_FLAG_OMNISCIENT
-     || AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_RIGHT] & AI_FLAG_OMNISCIENT)
-        return TRUE;
-
-    return BattlerHasAi(battlerId);
+    return TRUE;
 }
 
 bool32 IsAiBattlerPredictingAbility(u32 battlerId)
@@ -796,6 +792,7 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
         break;
     }
 
+    // DebugPrintf("HERE: %d", move);
     // check ADDITIONAL_EFFECTS
     u32 additionalEffectCount = GetMoveAdditionalEffectCount(move);
     for (i = 0; i < additionalEffectCount; i++)
@@ -881,6 +878,7 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
                 case MOVE_EFFECT_SP_DEF_MINUS_1:
                 case MOVE_EFFECT_ACC_MINUS_1:
                 case MOVE_EFFECT_EVS_MINUS_1:
+                    // DebugPrintf("HERE!?");
                     if (ShouldLowerStat(battlerAtk, battlerDef, abilityDef, STAT_ATK + (additionalEffect->moveEffect - MOVE_EFFECT_ATK_MINUS_1)) && noOfHitsToKo != 1)
                         return TRUE;
                     break;
@@ -894,15 +892,23 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
                     if (ShouldLowerStat(battlerAtk, battlerDef, abilityDef, STAT_ATK + (additionalEffect->moveEffect - MOVE_EFFECT_ATK_MINUS_2)) && noOfHitsToKo != 1)
                         return TRUE;
                     break;
+                case MOVE_EFFECT_DIRE_CLAW:
+                    if (AI_CanPoison(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE) 
+                        || AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE) 
+                        || AI_CanPutToSleep(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
+                        return TRUE;
+                    break;
             }
         }
     }
 
+    // DebugPrintf("LEAVING");
     return FALSE;
 }
 
 static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s32 noOfHitsToKo)
 {
+    // DebugPrintf("MoveEffectInMinus Move: %d", move);
     u32 abilityAtk = AI_DATA->abilities[battlerAtk];
     u32 abilityDef = AI_DATA->abilities[battlerDef];
     u8 i;
@@ -928,6 +934,7 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
         for (i = 0; i < additionalEffectCount; i++)
         {
             const struct AdditionalEffect *additionalEffect = GetMoveAdditionalEffectById(move, i);
+            // DebugPrintf("additionalEffect->moveEffect: %d", additionalEffect->moveEffect);
             switch (additionalEffect->moveEffect)
             {
                 case MOVE_EFFECT_ATK_MINUS_1:
@@ -947,9 +954,25 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
                 case MOVE_EFFECT_V_CREATE:
                 case MOVE_EFFECT_ATK_DEF_DOWN:
                 case MOVE_EFFECT_DEF_SPDEF_DOWN:
-                    if ((additionalEffect->self && abilityAtk != ABILITY_CONTRARY)
-                        || (noOfHitsToKo != 1 && abilityDef == ABILITY_CONTRARY && !DoesBattlerIgnoreAbilityChecks(battlerAtk, abilityAtk, move)))
+                    if (additionalEffect->self) 
+                    {
+                        if (abilityAtk == ABILITY_CONTRARY)
+                            return FALSE;
                         return TRUE;
+                    }
+                    else if (noOfHitsToKo == 1)
+                    {
+                        return FALSE;
+                    }
+                    else {
+                        if (abilityDef == ABILITY_CONTRARY)
+                        {
+                            if (DoesBattlerIgnoreAbilityChecks(battlerAtk, abilityAtk, move))
+                                return FALSE;
+                            return TRUE;
+                        }
+                        return FALSE;
+                    }
                     break;
                 case MOVE_EFFECT_RECHARGE:
                     return additionalEffect->self;
@@ -968,9 +991,25 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
                 case MOVE_EFFECT_EVS_PLUS_2:
                 case MOVE_EFFECT_ACC_PLUS_2:
                 case MOVE_EFFECT_ALL_STATS_UP:
-                    if ((additionalEffect->self && abilityAtk == ABILITY_CONTRARY)
-                        || (noOfHitsToKo != 1 && !(abilityDef == ABILITY_CONTRARY && !DoesBattlerIgnoreAbilityChecks(battlerAtk, abilityAtk, move))))
+                    if (additionalEffect->self)
+                    {
+                        if (abilityAtk == ABILITY_CONTRARY)
+                            return TRUE;
+                        return FALSE;
+                    }
+                    else if (noOfHitsToKo == 1)
+                    {
+                        return FALSE;
+                    }
+                    else {
+                        if (abilityDef == ABILITY_CONTRARY)
+                        {
+                            if (DoesBattlerIgnoreAbilityChecks(battlerAtk, abilityAtk, move))
+                                return TRUE;
+                            return FALSE;
+                        }
                         return TRUE;
+                    }
                     break;
             }
         }
@@ -978,6 +1017,20 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
     }
     }
     return FALSE;
+}
+
+s32 AI_WhichMoveDealsMoreDamage(u32 moveOneIndex, u32 moveTwoIndex, u32 battlerAtk, u32 battlerDef)
+{
+    struct SimulatedDamage moveOneDamage = AI_DATA->simulatedDmg[battlerAtk][battlerDef][moveOneIndex];
+    struct SimulatedDamage moveTwoDamage = AI_DATA->simulatedDmg[battlerAtk][battlerDef][moveTwoIndex];
+    // DebugPrintf("moveOneDamage: %d", moveOneDamage);
+    // DebugPrintf("moveTwoDamage: %d", moveTwoDamage);
+
+    if (moveOneDamage.expected > moveTwoDamage.expected)
+        return 1;
+    else if (moveTwoDamage.expected > moveOneDamage.expected)
+        return -1;
+    return 0;
 }
 
 // Checks if one of the moves has side effects or perks, assuming equal dmg or equal no of hits to KO
@@ -999,6 +1052,7 @@ s32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32
         if (moveContact2 && !moveContact1)
             return 1;
     }
+    // DebugPrintf("We survived hold effects and rough skin etc.");
 
     // Check additional effects.
     effect1 = AI_IsMoveEffectInMinus(battlerAtk, battlerDef, move1, noOfHitsToKo);
@@ -1007,6 +1061,8 @@ s32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32
         return 1;
     if (effect1 && !effect2)
         return -1;
+    // DebugPrintf("We survived additional minuses");
+    
 
     effect1 = AI_IsMoveEffectInPlus(battlerAtk, battlerDef, move1, noOfHitsToKo);
     effect2 = AI_IsMoveEffectInPlus(battlerAtk, battlerDef, move2, noOfHitsToKo);
@@ -1014,12 +1070,14 @@ s32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32
         return -1;
     if (effect1 && !effect2)
         return 1;
+    // DebugPrintf("We survived additional plusses");
 
     return 0;
 }
 
 u32 GetNoOfHitsToKO(u32 dmg, s32 hp)
 {
+    // DebugPrintf("simulated dmg: %d", dmg);
     if (dmg == 0)
         return 0;
     return hp / (dmg + 1) + 1;
@@ -1123,6 +1181,29 @@ s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler, u32 moveConsidered)
     return AI_IS_SLOWER;
 }
 
+bool32 SubTestControl()
+{
+    if (SUB_TEST_CONTROL == FALSE)
+        return FALSE;
+    return TRUE;
+}
+
+static bool32 CanBreakSubstituteAndKill(u32 battler, u32 battlerTarget, u32 move)
+{
+    if (TESTING && SubTestControl())
+        return FALSE;
+    if (gBattleMons[battlerTarget].status2 & STATUS2_SUBSTITUTE) {
+        u32 effect = GetMoveEffect(move);
+        if (effect == EFFECT_MULTI_HIT)
+            return TRUE;
+        if (GetMoveStrikeCount(move) > 1 && !(effect == EFFECT_DRAGON_DARTS && IsValidDoubleBattle(battlerTarget)))
+            return TRUE;
+        return FALSE;
+    }
+    else
+        return TRUE;
+}
+
 static bool32 CanEndureHit(u32 battler, u32 battlerTarget, u32 move)
 {
     u32 effect = GetMoveEffect(move);
@@ -1155,7 +1236,8 @@ bool32 CanTargetFaintAi(u32 battlerDef, u32 battlerAtk)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(unusable & (1u << i))
             && AI_DATA->simulatedDmg[battlerDef][battlerAtk][i].expected >= gBattleMons[battlerAtk].hp
-            && !CanEndureHit(battlerDef, battlerAtk, moves[i]))
+            && !CanEndureHit(battlerDef, battlerAtk, moves[i])
+            && CanBreakSubstituteAndKill(battlerDef, battlerAtk, moves[i]))
         {
             return TRUE;
         }
@@ -1192,6 +1274,8 @@ u32 GetBestDmgMoveFromBattler(u32 battlerAtk, u32 battlerDef)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
+        // DebugPrintf("Moves[i]: %d", moves[i]);
+        // DebugPrintf("Dmg[i]: %d", AI_DATA->simulatedDmg[battlerAtk][battlerDef][i].expected);
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(unusable & (1u << i))
             && bestDmg < AI_DATA->simulatedDmg[battlerAtk][battlerDef][i].expected)
         {
@@ -1991,10 +2075,11 @@ bool32 CanIndexMoveFaintTarget(u32 battlerAtk, u32 battlerDef, u32 index, u32 nu
 
 u16 *GetMovesArray(u32 battler)
 {
-    if (IsAiBattlerAware(battler) || IsAiBattlerAware(BATTLE_PARTNER(battler)))
-        return gBattleMons[battler].moves;
-    else
-        return gBattleResources->battleHistory->usedMoves[battler];
+    return gBattleMons[battler].moves;
+    // if (IsAiBattlerAware(battler) || IsAiBattlerAware(BATTLE_PARTNER(battler)))
+    //     return gBattleMons[battler].moves;
+    // else
+    //     return gBattleResources->battleHistory->usedMoves[battler];
 }
 
 bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensive)
@@ -3248,20 +3333,17 @@ bool32 AnyPartyMemberStatused(u32 battlerId, bool32 checkSoundproof)
     }
 
     // Check attacker's status
-    if ((GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) == GEN_5
-      || GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) >= GEN_8
-      || AI_DATA->abilities[battlerId] != ABILITY_SOUNDPROOF || !checkSoundproof)
+    if ((AI_DATA->abilities[battlerId] != ABILITY_SOUNDPROOF || !checkSoundproof)
      && GetMonData(&party[battlerOnField1], MON_DATA_STATUS) != STATUS1_NONE)
         return TRUE;
 
+    
     // Check inactive party mons' status
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (i == battlerOnField1 || i == battlerOnField2)
             continue;
-        if (GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) < GEN_5
-         && checkSoundproof
-         && GetMonAbility(&party[i]) == ABILITY_SOUNDPROOF)
+        if (checkSoundproof && GetMonAbility(&party[i]) == ABILITY_SOUNDPROOF)
             continue;
         if (GetMonData(&party[i], MON_DATA_STATUS) != STATUS1_NONE)
             return TRUE;
@@ -3546,7 +3628,9 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
 
     if (CountUsablePartyMons(battlerAtk) == 0
       && (CanTargetFaintAi(battlerDef, battlerAtk) || BattlerWillFaintFromSecondaryDamage(battlerAtk, AI_DATA->abilities[battlerAtk])))
+      {
         return FALSE; // Don't heal if last mon and will faint
+      }
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -3562,7 +3646,6 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
             }
         }
     }
-
     if (!IsDoubleBattle())
     {
         switch (GetMoveEffect(move))
@@ -3572,6 +3655,8 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
                 return TRUE;
             break;
         case EFFECT_HEAL_BELL:
+            if (AI_DATA->abilities[battlerAtk] == ABILITY_SOUNDPROOF)
+                return FALSE;
             if (hasStatus)
                 return TRUE;
         }
@@ -3583,6 +3668,8 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
         case EFFECT_WISH:
             return ShouldRecover(battlerAtk, battlerDef, move, 50); // Switch recovery isn't good idea in doubles
         case EFFECT_HEAL_BELL:
+            if (AI_DATA->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_SOUNDPROOF || AI_DATA->abilities[battlerAtk] == ABILITY_SOUNDPROOF)
+                return FALSE;
             if (hasStatus)
                 return TRUE;
         }
@@ -3863,7 +3950,7 @@ static u32 IncreaseStatUpScoreInternal(u32 battlerAtk, u32 battlerDef, u32 statI
     {
     case STAT_CHANGE_ATK:
         if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL) && shouldSetUp)
-            tempScore += DECENT_EFFECT;
+            tempScore += BEST_EFFECT;
         break;
     case STAT_CHANGE_DEF:
         if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL) || !HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL))
@@ -3876,11 +3963,11 @@ static u32 IncreaseStatUpScoreInternal(u32 battlerAtk, u32 battlerDef, u32 statI
         break;
     case STAT_CHANGE_SPEED:
         if ((noOfHitsToFaint >= 3 && !aiIsFaster) || noOfHitsToFaint == UNKNOWN_NO_OF_HITS)
-            tempScore += DECENT_EFFECT;
+            tempScore += GOOD_EFFECT;
         break;
     case STAT_CHANGE_SPATK:
         if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL) && shouldSetUp)
-            tempScore += DECENT_EFFECT;
+            tempScore += BEST_EFFECT;
         break;
     case STAT_CHANGE_SPDEF:
         if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL) || !HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
@@ -3893,7 +3980,7 @@ static u32 IncreaseStatUpScoreInternal(u32 battlerAtk, u32 battlerDef, u32 statI
         break;
     case STAT_CHANGE_ATK_2:
         if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL) && shouldSetUp)
-            tempScore += GOOD_EFFECT;
+            tempScore += 5;
         break;
     case STAT_CHANGE_DEF_2:
         if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL) || !HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL))
@@ -3906,11 +3993,11 @@ static u32 IncreaseStatUpScoreInternal(u32 battlerAtk, u32 battlerDef, u32 statI
         break;
     case STAT_CHANGE_SPEED_2:
         if ((noOfHitsToFaint >= 3 && !aiIsFaster) || noOfHitsToFaint == UNKNOWN_NO_OF_HITS)
-            tempScore += GOOD_EFFECT;
+            tempScore += BEST_EFFECT;
         break;
     case STAT_CHANGE_SPATK_2:
         if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL) && shouldSetUp)
-            tempScore += GOOD_EFFECT;
+            tempScore += 5;
         break;
     case STAT_CHANGE_SPDEF_2:
         if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL) || !HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
@@ -3977,9 +4064,7 @@ void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
     if (AI_CanBurn(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
     {
-        if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL)
-            || (!(AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_OMNISCIENT) // Not Omniscient but expects physical attacker
-                && gSpeciesInfo[gBattleMons[battlerDef].species].baseAttack >= gSpeciesInfo[gBattleMons[battlerDef].species].baseSpAttack + 10))
+        if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
         {
             if (GetMoveCategory(GetBestDmgMoveFromBattler(battlerDef, battlerAtk)) == DAMAGE_CATEGORY_PHYSICAL)
                 ADJUST_SCORE_PTR(DECENT_EFFECT);
@@ -4017,10 +4102,6 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
 void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 {
-    if (((AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0) && GetMoveEffect(GetBestDmgMoveFromBattler(battlerAtk, battlerDef)) != EFFECT_FOCUS_PUNCH)
-            || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_SLP || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
-        return;
-
     if (AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove))
         ADJUST_SCORE_PTR(DECENT_EFFECT);
     else
@@ -4061,9 +4142,7 @@ void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
 
     if (AI_CanGiveFrostbite(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
     {
-        if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL)
-            || (!(AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_OMNISCIENT) // Not Omniscient but expects special attacker
-                && gSpeciesInfo[gBattleMons[battlerDef].species].baseSpAttack >= gSpeciesInfo[gBattleMons[battlerDef].species].baseAttack + 10))
+        if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL))
         {
             if (GetMoveCategory(GetBestDmgMoveFromBattler(battlerDef, battlerAtk)) == DAMAGE_CATEGORY_SPECIAL)
                 ADJUST_SCORE_PTR(DECENT_EFFECT);
@@ -4278,6 +4357,7 @@ u32 IncreaseSubstituteMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
 
     if (AI_DATA->hpPercents[battlerAtk] > 70)
         scoreIncrease += WEAK_EFFECT;
+    // DebugPrintf("Score Increase: %d", scoreIncrease);
     return scoreIncrease;
 }
 

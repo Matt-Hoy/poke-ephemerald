@@ -171,24 +171,31 @@ AI_SINGLE_BATTLE_TEST("AI can choose Counter or Mirror Coat if the predicted mov
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% chance to trigger")
+AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% chance to trigger (PART ONE)")
 {
-    u16 ability;
-
-    PARAMETRIZE { ability = ABILITY_NONE; }
-    PARAMETRIZE { ability = ABILITY_SERENE_GRACE; }
-
     GIVEN {
-        ASSUME(MoveHasAdditionalEffectWithChance(MOVE_SHADOW_BALL, MOVE_EFFECT_SP_DEF_MINUS_1, 20));
-        ASSUME(MoveHasAdditionalEffectWithChance(MOVE_OCTAZOOKA, MOVE_EFFECT_ACC_MINUS_1, 50));
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_REGICE);
-        OPPONENT(SPECIES_REGIROCK) { Ability(ability); Moves(MOVE_SHADOW_BALL, MOVE_OCTAZOOKA); }
+        PLAYER(SPECIES_CRYOGONAL);
+        OPPONENT(SPECIES_REGIROCK) { Ability(ABILITY_NONE); Moves(MOVE_CRUNCH, MOVE_DIRE_CLAW); }
     } WHEN {
-        if (ability == ABILITY_NONE)
-            TURN { EXPECT_MOVE(opponent, MOVE_SHADOW_BALL); }
-        else
-            TURN { EXPECT_MOVES(opponent, MOVE_OCTAZOOKA); }
+        TURN 
+        { 
+            EXPECT_MOVES(opponent, MOVE_CRUNCH, MOVE_DIRE_CLAW);
+            SCORE_EQ(opponent, MOVE_CRUNCH, MOVE_DIRE_CLAW);
+        }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% chance to trigger (PART TWO)")
+{
+    GIVEN {
+        PLAYER(SPECIES_CRYOGONAL);
+        OPPONENT(SPECIES_REGIROCK) { Ability(ABILITY_SERENE_GRACE); Moves(MOVE_CRUNCH, MOVE_DIRE_CLAW); }
+    } WHEN {
+        TURN 
+        { 
+            EXPECT_MOVE(opponent, MOVE_DIRE_CLAW); 
+            SCORE_GT(opponent, MOVE_DIRE_CLAW, MOVE_CRUNCH);
+        }
     }
 }
 
@@ -219,22 +226,18 @@ AI_DOUBLE_BATTLE_TEST("AI chooses moves that cure self or partner")
 
 AI_SINGLE_BATTLE_TEST("AI chooses moves that cure inactive party members")
 {
-    u32 status, ability, config;
+    u32 status, ability;
 
     PARAMETRIZE { status = STATUS1_TOXIC_POISON; ability = ABILITY_SCRAPPY; }
     PARAMETRIZE { status = STATUS1_NONE;         ability = ABILITY_SCRAPPY; }
-    PARAMETRIZE { status = STATUS1_TOXIC_POISON; ability = ABILITY_SOUNDPROOF; config = GEN_4; }
-    PARAMETRIZE { status = STATUS1_TOXIC_POISON; ability = ABILITY_SOUNDPROOF; config = GEN_5; }
+    PARAMETRIZE { status = STATUS1_TOXIC_POISON; ability = ABILITY_SOUNDPROOF; }
 
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_HEAL_BELL) == EFFECT_HEAL_BELL);
-        WITH_CONFIG(GEN_CONFIG_HEAL_BELL_SOUNDPROOF, config);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_REGIROCK) { Moves(MOVE_BODY_PRESS, MOVE_HEAL_BELL); }
         OPPONENT(SPECIES_EXPLOUD) { Status1(status); Ability(ability); }
     } WHEN {
-        if (status == STATUS1_NONE || (ability == ABILITY_SOUNDPROOF && config <= GEN_4))
+        if (status == STATUS1_NONE || (ability == ABILITY_SOUNDPROOF))
             TURN { EXPECT_MOVE(opponent, MOVE_BODY_PRESS); }
         else
             TURN { EXPECT_MOVE(opponent, MOVE_HEAL_BELL); }
@@ -246,7 +249,6 @@ AI_DOUBLE_BATTLE_TEST("AI prioritizes Skill Swapping Contrary to allied mons tha
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_SKILL_SWAP) == EFFECT_SKILL_SWAP);
         ASSUME(GetMoveAdditionalEffectById(MOVE_OVERHEAT, 0)->moveEffect == MOVE_EFFECT_SP_ATK_MINUS_2);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_DOUBLE_BATTLE);
         PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
         OPPONENT(SPECIES_SPINDA) { Ability(ABILITY_CONTRARY); Speed(5); Moves(MOVE_SKILL_SWAP, MOVE_ENCORE, MOVE_FAKE_TEARS, MOVE_SWAGGER); }

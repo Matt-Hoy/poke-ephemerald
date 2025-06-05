@@ -4247,7 +4247,7 @@ static void ChooseStatBoostAnimation(u32 battler)
 bool32 CanAbilityBlockMove(u32 battlerAtk, u32 battlerDef, u32 move, u32 abilityDef, enum AbilityEffectOptions option)
 {
     const u8 *battleScriptBlocksMove = NULL;
-    s32 atkPriority = AI_DATA->aiCalcInProgress ? GetBattleMovePriority(battlerAtk, move) : GetChosenMovePriority(battlerAtk);
+    s32 atkPriority = GetBattleMovePriority(battlerAtk, move);
     u32 moveTarget = GetBattlerMoveTargetType(battlerAtk, move);
     u32 battlerAbility = battlerDef;
 
@@ -4274,6 +4274,7 @@ bool32 CanAbilityBlockMove(u32 battlerAtk, u32 battlerDef, u32 move, u32 ability
     case ABILITY_ARMOR_TAIL:
         if (atkPriority > 0 && !IsBattlerAlly(battlerAtk, battlerDef))
         {
+            // DebugPrintf("Here?");
             if (gBattleMons[battlerAtk].status2 & STATUS2_MULTIPLETURNS)
                 gHitMarker |= HITMARKER_NO_PPDEDUCT;
             battleScriptBlocksMove = BattleScript_DazzlingProtected;
@@ -12173,10 +12174,6 @@ bool32 IsSleepClauseActiveForSide(u32 battlerSide)
 
 bool32 IsSleepClauseEnabled()
 {
-    if (B_SLEEP_CLAUSE)
-        return TRUE;
-    if (FlagGet(B_FLAG_SLEEP_CLAUSE))
-        return TRUE;
     return FALSE;
 }
 
